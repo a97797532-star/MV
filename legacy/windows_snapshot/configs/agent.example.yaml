@@ -1,0 +1,18 @@
+﻿# Preparation only: no tool implementations or API requests.
+provider: openai
+api_key_env: OPENAI_API_KEY
+model_env: OPENAI_MODEL
+load_dotenv_path: .env
+llm_may_override_prediction: false
+tools:
+  - get_defect_statistics
+  - get_inspection_evidence
+  - request_human_review
+  - get_training_status
+  - get_model_comparison
+requires_separate_approval:
+  - finalize_human_review
+  - start_retraining
+  - replace_production_model
+# Future entry point should load_dotenv('.env', override=False), then read env.
+# Merely installing python-dotenv does not load .env automatically.

@@ -1,0 +1,22 @@
+Validation: 2026-11-06
+
+Scope: SYNTHETIC DEMO ONLY. Real-IAD images and model training NOT executed.
+Notebook: 32 cells, 15 code cells, all executed sequentially with IPython.
+Student notebook retains empty outputs; executed notebook includes analysis examples.
+All assignment switches False, exercise stubs are intentionally unimplemented.
+Tests: 16 passed for this backend (9 original + 7 focused-analysis tests).
+Cross-backend: 11 CSVs and 20 heatmap npz archives agree; timing excluded.
+Student and executed notebook sources identical; no error output cells.
+
+Versions:
+{
+  "numpy": "2.5.4",
+  "pandas": "2.2.3",
+  "Pillow": "13.0.0",
+  "matplotlib": "3.10.8",
+  "opencv-python-headless": "5.0.0.93",
+  "scikit-image": "0.26.0",
+  "scipy": "1.18.1",
+  "nbformat": "5.11.1",
+  "IPython": "9.18.1"
+}

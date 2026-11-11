@@ -1,0 +1,12 @@
+{
+  "images": 151050,
+  "split_agreements": 151050,
+  "differences": 0,
+  "split_counts": {
+    "train": 105735,
+    "test": 22660,
+    "validation": 22655
+  },
+  "product_groups": 30210,
+  "original_sources_unchanged": true
+}

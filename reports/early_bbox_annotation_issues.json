@@ -1,0 +1,38 @@
+[
+  {
+    "image_path": "bottle_cap/NG/QS/S0077/bottle_cap_0077_NG_QS_C5_20230926092821.jpg",
+    "mask_path": "bottle_cap/NG/QS/S0077/bottle_cap_0077_NG_QS_C5_20230926092821.png",
+    "mask_shape": [
+      1024,
+      1024
+    ],
+    "positive_pixels": 0,
+    "unique_values": [
+      0
+    ]
+  },
+  {
+    "image_path": "bottle_cap/NG/QS/S0084/bottle_cap_0084_NG_QS_C5_20230926092959.jpg",
+    "mask_path": "bottle_cap/NG/QS/S0084/bottle_cap_0084_NG_QS_C5_20230926092959.png",
+    "mask_shape": [
+      1024,
+      1024
+    ],
+    "positive_pixels": 0,
+    "unique_values": [
+      0
+    ]
+  },
+  {
+    "image_path": "button_battery/NG/HS/S0090/button_battery_0090_NG_HS_C4_20230922131710.jpg",
+    "mask_path": "button_battery/NG/HS/S0090/button_battery_0090_NG_HS_C4_20230922131710.png",
+    "mask_shape": [
+      1024,
+      1024
+    ],
+    "positive_pixels": 0,
+    "unique_values": [
+      0
+    ]
+  }
+]

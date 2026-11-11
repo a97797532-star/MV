@@ -1,0 +1,368 @@
+{
+  "root": "/mnt/c/Users/user1/jogeonug/MV",
+  "preserved_sources": [
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/scripts/setup.ps1",
+      "target": "legacy/windows_snapshot/scripts/setup.ps1",
+      "source_sha256": "c064260f023736f9489efe2ad63c550e9e31ddafed7ebfc4032de1d2bd682f64",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/scripts/survey_environment.py",
+      "target": "legacy/windows_snapshot/scripts/survey_environment.py",
+      "source_sha256": "91e6c81eed6217452436e5b2724f0212ebcf8ada0ac34b5ee4c416964e304c07",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/scripts/validate_environment.py",
+      "target": "legacy/windows_snapshot/scripts/validate_environment.py",
+      "source_sha256": "94ec38803bd664594a16ebe1a7ae6db18ded5aa18396bac40b5c228755ff8ced",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/configs/agent.example.yaml",
+      "target": "legacy/windows_snapshot/configs/agent.example.yaml",
+      "source_sha256": "6c617dd1cc8f6fb07ff46bfb99f554cabbfc6bcead94563ea5890a217f610455",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/configs/experiment.example.yaml",
+      "target": "legacy/windows_snapshot/configs/experiment.example.yaml",
+      "source_sha256": "8991a4caf97b7634f1389340736fbb6989872c55459368018fe3f164217aea59",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/configs/experiments.sql",
+      "target": "legacy/windows_snapshot/configs/experiments.sql",
+      "source_sha256": "7acb32d401cea82bd28a98e3537ef2d1dcc8d970b24085a2bbea6600ac501e70",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/environments/README.md",
+      "target": "legacy/windows_snapshot/environments/README.md",
+      "source_sha256": "8fadf67c81e81d711722e69a2d7bddd4b2fb5086e8aca31ce1d6cd0bc6b4d5c6",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/analysis_guide.ipynb",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/analysis_guide.ipynb",
+      "source_sha256": "5a94e1be075e6f5ba5da25cf066acf6c7064bfa3bbade75e8e7a388e5b0d38cf",
+      "copy_mode": "outputs cleared in Linux copy only; Windows source untouched"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/analysis_guide_demo_executed.ipynb",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/analysis_guide_demo_executed.ipynb",
+      "source_sha256": "7b04e1bac2d3dc2046ca766eb86f78fa04869ea20406c5f557c85cae46b11c59",
+      "copy_mode": "outputs cleared in Linux copy only; Windows source untouched"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/analysis_guide_legacy.ipynb",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/analysis_guide_legacy.ipynb",
+      "source_sha256": "1e400fcb8231e52f9fd678111301c3d37af93eb3475b7ffb7c841ac549798654",
+      "copy_mode": "outputs cleared in Linux copy only; Windows source untouched"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/analyze_realiad_information_loss.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/analyze_realiad_information_loss.py",
+      "source_sha256": "725c01bded3e47aae8c5e9afe80881e3bf2640fa694642668600679216ee8112",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/backend.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/backend.py",
+      "source_sha256": "4a7354d00a19a91e41792a529679120a1b4ddf555340f7687fe85c7b01de6ae5",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/compare_focused.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/compare_focused.py",
+      "source_sha256": "bb90fd55d0941cf49d5bd18787778950b4bd36ee3d5bf5cd93eb1748f6a890ad",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/compare_results.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/compare_results.py",
+      "source_sha256": "c9c9837af94388e0d49661cce8e88f1048075d23bd5b380de8144cd7d383bca5",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/core.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/core.py",
+      "source_sha256": "a26f00810add27b3657ac291e399251a05087114a2ec1eaa310e82d7bacbf033",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/coursework.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/coursework.py",
+      "source_sha256": "f21af369e3c2aed5672771b4ab24635d7c57ed41219533be8b9e559f89f0c94f",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/make_demo.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/make_demo.py",
+      "source_sha256": "351aa06063fa88ddbda205571e28f8a601871720762a7f23aec72fc5a70bc4e5",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/parity_report.md",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/parity_report.md",
+      "source_sha256": "ec15f05048d5b6d201426976b0b29b7b9ba64b8af9fa795d44975b9783d197a5",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/README.md",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/README.md",
+      "source_sha256": "6c6bb909d6d347425d71726f98b9ac31d0d34282e04f8e7d67b08ec31476b90e",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/README_legacy.md",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/README_legacy.md",
+      "source_sha256": "81edfef7947359e7a8f0a5b176c50cf75a31b66e2f99fce04f19bd6837c264dc",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/realiad_5view_information_loss.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/realiad_5view_information_loss.py",
+      "source_sha256": "6f041d00ae23654b9dbb27bf0dcc208d34190bcf9cf9959149440a66ab11ddbb",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/realiad_bbox_pipeline.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/realiad_bbox_pipeline.py",
+      "source_sha256": "008a36f15bc1d51fd63a7016724a7bd268739df3512660b42d12a2a9faf0907a",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/realiad_multiclass_bbox.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/realiad_multiclass_bbox.py",
+      "source_sha256": "f228e2833caeb33dc0c186d8b53acf8951d2e197d9e3d5ee5cf03e187f49193b",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/realiad_resolution_opencv.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/realiad_resolution_opencv.py",
+      "source_sha256": "6dc327ff2e752b6c571c696f4742687ab811a23a6829f04839124a3f448cf67a",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/REFERENCE.md",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/REFERENCE.md",
+      "source_sha256": "7f92e9b4bbc522bc62518f3e8cf9aff1193d28efedc0751c1fc02b17d9c8ac89",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/requirements-assignment.txt",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/requirements-assignment.txt",
+      "source_sha256": "a4ee01cbe4920e5220a6be20aca9e8aa607b9ac7ecf1de8899275bfad97e92e4",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/requirements-notebook.txt",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/requirements-notebook.txt",
+      "source_sha256": "71383f0973b4465f5caee501174f019786c75e40e05bd38efe5ea194262116a1",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/requirements.txt",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/requirements.txt",
+      "source_sha256": "873a7c3162f613b681f673b98addb6843870fc99249fe306e00e8158f43247e4",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/test_contracts.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/test_contracts.py",
+      "source_sha256": "f16f78e21eec1429db68ba2ea48a7a5f4be47cd4e199f80a1fbb53a7f34073cf",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/test_coursework.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/test_coursework.py",
+      "source_sha256": "ce7a9520c98042d476d9cd63768cadb7512877159272133348f5c5d8c5e61cf6",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/validate_notebook.py",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/validate_notebook.py",
+      "source_sha256": "c01c863a8669418d6a7dc6e2d656231b1aad0d51084df95ecdf59800b9974aa4",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/validation.txt",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/validation.txt",
+      "source_sha256": "6bab6964dbdef4914a6967945136ae57191c2ec2d319df510b3707b559ce40f1",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/validation_notebook.txt",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/validation_notebook.txt",
+      "source_sha256": "5acdc08792200823a3ebf09fb8df706a43aa0b6a67ea86fc18e4b8b2363d77d3",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/validation_tests.txt",
+      "target": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/validation_tests.txt",
+      "source_sha256": "78c6f3734a73918b37968f59e376ebe6a2b985aef02d25dd72a0498e1615750a",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/analysis_guide.ipynb",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/analysis_guide.ipynb",
+      "source_sha256": "87d33112e3f1f22ad88be91070863b69d47de3da5bbdcecc96769e02c6741016",
+      "copy_mode": "outputs cleared in Linux copy only; Windows source untouched"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/analysis_guide_demo_executed.ipynb",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/analysis_guide_demo_executed.ipynb",
+      "source_sha256": "c6565911b3deadf61f450d99d8aa5d5fbd19f72251815cb663058d0142ccd75c",
+      "copy_mode": "outputs cleared in Linux copy only; Windows source untouched"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/analysis_guide_legacy.ipynb",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/analysis_guide_legacy.ipynb",
+      "source_sha256": "fcd6e08e086ea97009816b6b34c8ddec01d975ddd542d1b3dfc108f4791ed506",
+      "copy_mode": "outputs cleared in Linux copy only; Windows source untouched"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/backend.py",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/backend.py",
+      "source_sha256": "c31762623b8b35f42eef9cfac7a48eec5060689b931d849e5b1c9369ffc000db",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/compare_focused.py",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/compare_focused.py",
+      "source_sha256": "bb90fd55d0941cf49d5bd18787778950b4bd36ee3d5bf5cd93eb1748f6a890ad",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/compare_results.py",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/compare_results.py",
+      "source_sha256": "c9c9837af94388e0d49661cce8e88f1048075d23bd5b380de8144cd7d383bca5",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/core.py",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/core.py",
+      "source_sha256": "a26f00810add27b3657ac291e399251a05087114a2ec1eaa310e82d7bacbf033",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/coursework.py",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/coursework.py",
+      "source_sha256": "f21af369e3c2aed5672771b4ab24635d7c57ed41219533be8b9e559f89f0c94f",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/make_demo.py",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/make_demo.py",
+      "source_sha256": "351aa06063fa88ddbda205571e28f8a601871720762a7f23aec72fc5a70bc4e5",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/parity_report.md",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/parity_report.md",
+      "source_sha256": "ec15f05048d5b6d201426976b0b29b7b9ba64b8af9fa795d44975b9783d197a5",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/README.md",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/README.md",
+      "source_sha256": "2b3025e8e65affb24c8666ab1dcbba6391f7c972593e29c40f59f721f271a46b",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/README_legacy.md",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/README_legacy.md",
+      "source_sha256": "eeb496e57c1b33887297abf395fef990da94ab7f361c17b7532d8b7ddd5e004e",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/REFERENCE.md",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/REFERENCE.md",
+      "source_sha256": "7f92e9b4bbc522bc62518f3e8cf9aff1193d28efedc0751c1fc02b17d9c8ac89",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/requirements-assignment.txt",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/requirements-assignment.txt",
+      "source_sha256": "a4ee01cbe4920e5220a6be20aca9e8aa607b9ac7ecf1de8899275bfad97e92e4",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/requirements-notebook.txt",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/requirements-notebook.txt",
+      "source_sha256": "71383f0973b4465f5caee501174f019786c75e40e05bd38efe5ea194262116a1",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/requirements.txt",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/requirements.txt",
+      "source_sha256": "d32212490943880a741af37f668b64bbbb9a392e7dea88e6c8e65e6adc955252",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/test_contracts.py",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/test_contracts.py",
+      "source_sha256": "f16f78e21eec1429db68ba2ea48a7a5f4be47cd4e199f80a1fbb53a7f34073cf",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/test_coursework.py",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/test_coursework.py",
+      "source_sha256": "ce7a9520c98042d476d9cd63768cadb7512877159272133348f5c5d8c5e61cf6",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/validate_notebook.py",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/validate_notebook.py",
+      "source_sha256": "c01c863a8669418d6a7dc6e2d656231b1aad0d51084df95ecdf59800b9974aa4",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/validation.txt",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/validation.txt",
+      "source_sha256": "6bab6964dbdef4914a6967945136ae57191c2ec2d319df510b3707b559ce40f1",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/validation_notebook.txt",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/validation_notebook.txt",
+      "source_sha256": "5acdc08792200823a3ebf09fb8df706a43aa0b6a67ea86fc18e4b8b2363d77d3",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/validation_tests.txt",
+      "target": "legacy/windows_snapshot/RealIAD_ScikitImage_Analysis_Assignment_v2/RealIAD_ScikitImage/validation_tests.txt",
+      "source_sha256": "89633c8eed7de537c351555d9120c55659f9fcb6688ea6c3e880af9d7dbb98bc",
+      "copy_mode": "byte-identical source copy"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/environments/anomaly/pyproject.toml",
+      "target": "legacy/windows_snapshot/environments/anomaly/pyproject.toml",
+      "source_sha256": "4262dbeb833b186644bf49652fb95a06ec6fdebe4a10110de7e7372eacaed415",
+      "copy_mode": "unchanged environment definition, not installed"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/environments/detection/pyproject.toml",
+      "target": "legacy/windows_snapshot/environments/detection/pyproject.toml",
+      "source_sha256": "47bfdb96549ee29a9c32379396a6401f24b9d827ef25e83c9f5a385b7882e549",
+      "copy_mode": "unchanged environment definition, not installed"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/environments/export/pyproject.toml",
+      "target": "legacy/windows_snapshot/environments/export/pyproject.toml",
+      "source_sha256": "4161e4700c3f8e31b4e56b556f7db00242f55a2f098f148e03e6253b4eaf7882",
+      "copy_mode": "unchanged environment definition, not installed"
+    },
+    {
+      "source": "/mnt/c/Users/user1/jogeonug/MV/environments/specialized/README.md",
+      "target": "legacy/windows_snapshot/environments/specialized/README.md",
+      "source_sha256": "296c05ccfe6d4b6b43a8776ee019b511d2e27d25483c7ffc4ec8e0d07f2101bf",
+      "copy_mode": "unchanged environment definition, not installed"
+    }
+  ],
+  "source_count": 60,
+  "original_files_modified": false,
+  "datasets_weights_virtualenvs_results_not_copied": true
+}

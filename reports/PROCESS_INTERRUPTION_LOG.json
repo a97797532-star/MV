@@ -1,0 +1,11 @@
+[
+  {
+    "observed_utc": "2026-11-11T07:10:21.529721+00:00",
+    "stage": "resolution full batch controller",
+    "exit_code": 143,
+    "successful_checkpoint_images": 104352,
+    "cause": "SIGTERM observed; exact external cause not established, not asserted as OOM",
+    "recovery": "Preserved successful rows; resumed same metrics/input snapshot in 1000-image bounded workers",
+    "image_decode_failures": "Separate from process termination; consult stage execution JSON"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "time": "2026-11-11T08:48:27.474770+00:00",
+  "smoke": "outputs/smoke_final_20261111T084712916874Z",
+  "root": "/home/geonug/MV/dataset",
+  "source_sha256": "253019974b36a9d4beeb580580be6b3e6cf2ed59152146d813545d4083b4acf1",
+  "lock_sha256": "1370be94aad3bb25c53b5b4bf945dc562508671a57116587ec2b70a2d6a66b32",
+  "pytest_passed": true,
+  "environment_passed": true
+}

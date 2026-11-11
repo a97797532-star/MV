@@ -1,0 +1,259 @@
+{
+  "pages": [
+    {
+      "kind": "text",
+      "title": "Real-IAD 전체 해상도 정보 손실 상세 분석",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "1. 회의용 핵심 결론",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "table",
+      "title": "1. 회의용 핵심 결론",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "1. 회의용 핵심 결론",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "2. 범위·분모·재현 정책",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "3. 지표 정의와 해석",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "4. 전체 분포·중앙값·분위수·극단값",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "table",
+      "title": "4. 전체 분포·중앙값·분위수·극단값",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "5. 품목별·C1~C5별·OK/NG별 비교",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "table",
+      "title": "5. 품목별·C1~C5별·OK/NG별 비교",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "table",
+      "title": "5. 품목별·C1~C5별·OK/NG별 비교",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "table",
+      "title": "5. 품목별·C1~C5별·OK/NG별 비교",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "table",
+      "title": "5. 품목별·C1~C5별·OK/NG별 비교",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "5. 품목별·C1~C5별·OK/NG별 비교",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "table",
+      "title": "6. 512→256의 추가 손실",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "6. 512→256의 추가 손실",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "table",
+      "title": "7. 손실 상·하위 실제 영상 검수",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "7. 손실 상·하위 실제 영상 검수",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "table",
+      "title": "8. 기존 마스크·Bounding Box 연결",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "8. 기존 마스크·Bounding Box 연결",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "9. 해상도별 장단점과 실험 가설",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "text",
+      "title": "10. 한계·미완료·회의 결정 항목",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    },
+    {
+      "kind": "figure",
+      "title": "distribution psnr db",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/distribution_psnr_db.png"
+    },
+    {
+      "kind": "figure",
+      "title": "distribution ssim",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/distribution_ssim.png"
+    },
+    {
+      "kind": "figure",
+      "title": "distribution edge recall",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/distribution_edge_recall.png"
+    },
+    {
+      "kind": "figure",
+      "title": "distribution edge f1",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/distribution_edge_f1.png"
+    },
+    {
+      "kind": "figure",
+      "title": "distribution local contrast retention",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/distribution_local_contrast_retention.png"
+    },
+    {
+      "kind": "figure",
+      "title": "distribution high frequency proxy retention",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/distribution_high_frequency_proxy_retention.png"
+    },
+    {
+      "kind": "figure",
+      "title": "distribution rgb rmse",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/distribution_rgb_rmse.png"
+    },
+    {
+      "kind": "figure",
+      "title": "category comparison",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/category_comparison.png"
+    },
+    {
+      "kind": "figure",
+      "title": "view comparison",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/view_comparison.png"
+    },
+    {
+      "kind": "figure",
+      "title": "status comparison",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/status_comparison.png"
+    },
+    {
+      "kind": "figure",
+      "title": "stepwise distribution",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/stepwise_distribution.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 01 full",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_01_full.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 01 crop",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_01_crop.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 02 full",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_02_full.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 02 crop",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_02_crop.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 03 full",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_03_full.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 03 crop",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_03_crop.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 04 full",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_04_full.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 04 crop",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_04_crop.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 05 full",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_05_full.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 05 crop",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_05_crop.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 06 full",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_06_full.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 06 crop",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_06_crop.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 07 full",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_07_full.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 07 crop",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_07_crop.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 08 full",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_08_full.png"
+    },
+    {
+      "kind": "figure",
+      "title": "case 08 crop",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/case_08_crop.png"
+    },
+    {
+      "kind": "figure",
+      "title": "defect roi and bbox risk",
+      "source": "/home/geonug/MV/outputs/resolution_detail_20261111_v2/defect_roi_and_bbox_risk.png"
+    },
+    {
+      "kind": "text",
+      "title": "12. 전체 결과 파일과 재현",
+      "source": "reports/RESOLUTION_DETAILED_ANALYSIS.md"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+﻿[project]
+name = "realiad-anomaly"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["anomalib", "torch", "torchvision", "huggingface-hub", "safetensors"]
+[tool.uv]
+package = false
+cache-dir = ".uv-cache"
+environments = ["sys_platform == 'win32' and platform_machine == 'AMD64'"]
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

@@ -1,0 +1,44 @@
+{
+  "renderer": "PDFium via pypdfium2",
+  "renderer_version": "5.15.2",
+  "page_count": 47,
+  "manifest_page_count": 47,
+  "page_count_matches": true,
+  "extracted_text_characters": 14058,
+  "pages_with_extractable_korean": 47,
+  "all_pages_have_korean": true,
+  "rendered_pages": [
+    {
+      "page": 1,
+      "path": "outputs/resolution_detail_20261111_v2/pdf_review/page_001.png",
+      "nonwhite_pixel_fraction": 0.009495548961424332
+    },
+    {
+      "page": 2,
+      "path": "outputs/resolution_detail_20261111_v2/pdf_review/page_002.png",
+      "nonwhite_pixel_fraction": 0.017654748812018842
+    },
+    {
+      "page": 12,
+      "path": "outputs/resolution_detail_20261111_v2/pdf_review/page_012.png",
+      "nonwhite_pixel_fraction": 0.0283234075518942
+    },
+    {
+      "page": 20,
+      "path": "outputs/resolution_detail_20261111_v2/pdf_review/page_020.png",
+      "nonwhite_pixel_fraction": 0.07367627426974609
+    },
+    {
+      "page": 24,
+      "path": "outputs/resolution_detail_20261111_v2/pdf_review/page_024.png",
+      "nonwhite_pixel_fraction": 0.08682257406293015
+    },
+    {
+      "page": 47,
+      "path": "outputs/resolution_detail_20261111_v2/pdf_review/page_047.png",
+      "nonwhite_pixel_fraction": 0.07923747864400683
+    }
+  ],
+  "blank_render_detected": false,
+  "success": true
+}

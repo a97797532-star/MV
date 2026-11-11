@@ -1,0 +1,20 @@
+{
+  "ubuntu_jpg": 151050,
+  "ubuntu_png": 51329,
+  "windows_reference_jpg": 146060,
+  "windows_reference_png": 50115,
+  "jpg_delta": 4990,
+  "png_delta": 1214,
+  "u_block_jpg": 4990,
+  "u_block_png": 1214,
+  "interpretation": "Counts exactly match the u_block category; this is a candidate explanation only. No Windows manifest to establish omission or original scope.",
+  "latest_saved_windows_evidence": {
+    "jpg": 151050,
+    "png": 51329,
+    "u_block_included": true,
+    "jpg_path_set_equal_to_ubuntu": true,
+    "png_path_set_equal_to_ubuntu": true,
+    "comparison_file": "outputs/windows_comparison_20261111_v2/comparison_validation.json"
+  },
+  "updated_interpretation": "The u_block omission hypothesis does not describe the latest actual Windows CSV: it includes u_block and matches Ubuntu. The cause of older reference counts remains unconfirmed. Earlier fields are retained as investigation history."
+}

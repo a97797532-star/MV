@@ -1,0 +1,17 @@
+{
+  "status_counts": {
+    "('OK', 'OK')": 72840,
+    "('NG', 'NG')": 78210
+  },
+  "mismatch_examples": [],
+  "ng_missing_examples": [
+    "dataset/phone_battery/NG/PS/S0011/phone_battery_0011_NG_PS_C5_20230919101937.jpg",
+    "dataset/phone_battery/NG/PS/S1301/phone_battery_1301_NG_PS_C1_20230918131923.jpg",
+    "dataset/phone_battery/NG/PS/S1301/phone_battery_1301_NG_PS_C4_20230918131923.jpg",
+    "dataset/phone_battery/NG/PS/S1301/phone_battery_1301_NG_PS_C5_20230918131923.jpg",
+    "dataset/phone_battery/NG/PS/S0017/phone_battery_0017_NG_PS_C2_20230919102216.jpg",
+    "dataset/phone_battery/NG/PS/S0105/phone_battery_0105_NG_PS_C3_20230919124844.jpg",
+    "dataset/phone_battery/NG/PS/S0105/phone_battery_0105_NG_PS_C4_20230919124844.jpg",
+    "dataset/phone_battery/NG/PS/S0055/phone_battery_0055_NG_PS_C4_20230919112702.jpg"
+  ]
+}

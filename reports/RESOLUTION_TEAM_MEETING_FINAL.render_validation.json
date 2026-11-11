@@ -1,0 +1,44 @@
+{
+  "renderer": "PDFium via pypdfium2",
+  "renderer_version": "5.15.2",
+  "page_count": 51,
+  "manifest_page_count": 51,
+  "page_count_matches": true,
+  "extracted_text_characters": 16173,
+  "pages_with_extractable_korean": 51,
+  "all_pages_have_korean": true,
+  "rendered_pages": [
+    {
+      "page": 1,
+      "path": "outputs/resolution_detail_20261111_v2/final_meeting_pdf_review/page_001.png",
+      "nonwhite_pixel_fraction": 0.008882709772917488
+    },
+    {
+      "page": 2,
+      "path": "outputs/resolution_detail_20261111_v2/final_meeting_pdf_review/page_002.png",
+      "nonwhite_pixel_fraction": 0.009671238751357445
+    },
+    {
+      "page": 3,
+      "path": "outputs/resolution_detail_20261111_v2/final_meeting_pdf_review/page_003.png",
+      "nonwhite_pixel_fraction": 0.07653987950723856
+    },
+    {
+      "page": 23,
+      "path": "outputs/resolution_detail_20261111_v2/final_meeting_pdf_review/page_023.png",
+      "nonwhite_pixel_fraction": 0.07374544347838116
+    },
+    {
+      "page": 26,
+      "path": "outputs/resolution_detail_20261111_v2/final_meeting_pdf_review/page_026.png",
+      "nonwhite_pixel_fraction": 0.11043279173842972
+    },
+    {
+      "page": 51,
+      "path": "outputs/resolution_detail_20261111_v2/final_meeting_pdf_review/page_051.png",
+      "nonwhite_pixel_fraction": 0.06461372455437737
+    }
+  ],
+  "blank_render_detected": false,
+  "success": true
+}

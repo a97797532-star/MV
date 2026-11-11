@@ -81,3 +81,5 @@ tmp/
 temp/
 *.tmp
 *.log
+
+.uv-cache/

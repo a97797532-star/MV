@@ -1,0 +1,5 @@
+Final command via scripts/record_preflight.py: uv run --locked python -m pytest -q
+......................                                                   [100%]
+22 passed in 11.29s
+
+Preserved OpenCV tests separately: 16 tests in50.300s, OK.

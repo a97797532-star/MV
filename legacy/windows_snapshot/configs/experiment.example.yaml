@@ -1,0 +1,36 @@
+﻿# Template only: does not start training or inference.
+run:
+  seed: 42
+  model: null
+  model_version: null
+  source_commit: null
+  environment_lock_sha256: null
+  dataset_manifest_sha256: null
+  split_manifest_sha256: null
+input:
+  dataset_root: dataset
+  camera_ids: [C1, C2, C3, C4, C5] # Replace with dataset metadata IDs before experiments.
+  group_split_by: product_id
+  image_size: [256, 256]
+  batch_size: 1
+  dtype: float32
+  device: cpu
+product_decision:
+  aggregation: max_score # Provisional; freeze before comparing models.
+  normal_threshold: null
+  defect_threshold: null
+  missing_view: hold
+metrics:
+  product: [recall, precision, f1, fpr, hold_rate]
+  location: [bbox_ap, bbox_recall, aupro, ap_small]
+  cost: [view_latency_ms, product_5view_latency_ms, p50_ms, p95_ms, peak_rss_mb, peak_gpu_mb]
+benchmark:
+  warmup_iterations: 10
+  measured_iterations: 100
+  synchronize_cuda: true
+  include_preprocessing: true
+  include_io: false
+  concurrency: 1
+output:
+  directory: outputs
+  database: outputs/experiments.sqlite

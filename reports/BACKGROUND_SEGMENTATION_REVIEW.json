@@ -1,0 +1,27 @@
+{
+  "reviewed_utc": "2026-11-11T06:28:53.368775+00:00",
+  "algorithm_version": "border-lab-v5",
+  "algorithm_sha256": "ea49f1e2962d8e9b333908127bb53f5477644098691ff61c85c4911b651c892f",
+  "sample_run": "outputs/background_sample_20261111_v5",
+  "calculated_images": 300,
+  "visual_review_completed": true,
+  "visually_reviewed_cases": 30,
+  "review_pages": [
+    "foreground_segmentation_examples_01.png",
+    "foreground_segmentation_examples_02.png",
+    "foreground_segmentation_examples_03.png",
+    "foreground_segmentation_examples_04.png",
+    "foreground_segmentation_examples_05.png",
+    "foreground_segmentation_examples_06.png"
+  ],
+  "categories": 30,
+  "scope": "Review of six contact sheets containing 30 category representatives; not semantic validation of all 300 sample images or full dataset",
+  "synthetic_tests": "5 passed in 0.25s",
+  "approved_use": "Descriptive regional statistics only, three methods compared per image; retain uncertainty/missing values, not GT masks or model training labels",
+  "findings": [
+    "Uniform-background silhouettes and large internal openings generally plausible in reviewed accepted cases",
+    "plastic_nut/usb shadows, toy background intrusion, sim_card_set paper/shadow texture, phone_battery gradient/letter holes remain uncertain",
+    "Toothbrush/zipper clipped at border flagged uncertain",
+    "Candidate method agreement is not segmentation accuracy; no ground-truth foreground labels"
+  ]
+}

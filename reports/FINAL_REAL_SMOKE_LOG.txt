@@ -1,0 +1,8 @@
+Output: /home/geonug/MV/outputs/smoke_final_20261111T084712916874Z
+metadata 100/100 errors=0
+brightness_per_image 40/100 errors=0
+brightness_per_image 80/100 errors=0
+brightness_per_image 100/100 errors=0
+resolution_checkpoint 40/100 errors=0
+resolution_checkpoint 80/100 errors=0
+resolution_checkpoint 100/100 errors=0

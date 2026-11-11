@@ -1,0 +1,21 @@
+test_constant_and_singleton (test_contracts.ArrayContracts.test_constant_and_singleton) ... ok
+test_diagonal_and_border (test_contracts.ArrayContracts.test_diagonal_and_border) ... ok
+test_empty (test_contracts.ArrayContracts.test_empty) ... ok
+test_laplacian_boundary_oracle (test_contracts.ArrayContracts.test_laplacian_boundary_oracle) ... ok
+test_resize_pixel_mapping (test_contracts.ArrayContracts.test_resize_pixel_mapping) ... ok
+test_corrupt_image_and_bad_mask (test_contracts.DataContracts.test_corrupt_image_and_bad_mask) ... ok
+test_duplicate_key_and_cross_split_hash (test_contracts.DataContracts.test_duplicate_key_and_cross_split_hash) ... ok
+test_group_split_holdout (test_contracts.DataContracts.test_group_split_holdout) ... ok
+test_missing_mask_is_unknown (test_contracts.DataContracts.test_missing_mask_is_unknown) ... ok
+test_binary_contracts_and_boxes (test_coursework.FocusContracts.test_binary_contracts_and_boxes) ... ok
+test_brightness_image_weighting_and_class_view (test_coursework.FocusContracts.test_brightness_image_weighting_and_class_view) ... ok
+test_export_roundtrip_and_empty (test_coursework.FocusContracts.test_export_roundtrip_and_empty) ... ok
+test_heatmap_split_and_denominator (test_coursework.FocusContracts.test_heatmap_split_and_denominator) ... ok
+test_no_test_eda (test_coursework.FocusContracts.test_no_test_eda) ... ok
+test_occupancy_preserves_one_pixel (test_coursework.FocusContracts.test_occupancy_preserves_one_pixel) ... ok
+test_resolution_no_mask_and_actual_values (test_coursework.FocusContracts.test_resolution_no_mask_and_actual_values) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 1.630s
+
+OK

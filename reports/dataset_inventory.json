@@ -1,0 +1,142 @@
+{
+  "counts": {
+    ".jpg": 151050,
+    ".identifier": 202379,
+    ".png": 51329
+  },
+  "categories": {
+    "phone_battery": {
+      ".jpg": 5000,
+      ".png": 1550
+    },
+    "toy_brick": {
+      ".jpg": 5010,
+      ".png": 1536
+    },
+    "rolled_strip_base": {
+      ".jpg": 5050,
+      ".png": 2525
+    },
+    "bottle_cap": {
+      ".jpg": 5015,
+      ".png": 1631
+    },
+    "fire_hood": {
+      ".jpg": 5025,
+      ".png": 1350
+    },
+    "mint": {
+      ".jpg": 5305,
+      ".png": 2099
+    },
+    "switch": {
+      ".jpg": 5050,
+      ".png": 1994
+    },
+    "mounts": {
+      ".jpg": 5050,
+      ".png": 1338
+    },
+    "regulator": {
+      ".jpg": 5100,
+      ".png": 1080
+    },
+    "toothbrush": {
+      ".jpg": 5005,
+      ".png": 2027
+    },
+    "woodstick": {
+      ".jpg": 5005,
+      ".png": 1073
+    },
+    "u_block": {
+      ".jpg": 4990,
+      ".png": 1214
+    },
+    "button_battery": {
+      ".jpg": 5000,
+      ".png": 2150
+    },
+    "porcelain_doll": {
+      ".jpg": 5000,
+      ".png": 1255
+    },
+    "vcpill": {
+      ".jpg": 5025,
+      ".png": 1470
+    },
+    "end_cap": {
+      ".jpg": 5010,
+      ".png": 2183
+    },
+    "sim_card_set": {
+      ".jpg": 5030,
+      ".png": 2069
+    },
+    "plastic_nut": {
+      ".jpg": 5010,
+      ".png": 1246
+    },
+    "audiojack": {
+      ".jpg": 5050,
+      ".png": 1296
+    },
+    "pcb": {
+      ".jpg": 5010,
+      ".png": 2289
+    },
+    "plastic_plug": {
+      ".jpg": 4995,
+      ".png": 1419
+    },
+    "terminalblock": {
+      ".jpg": 5050,
+      ".png": 2008
+    },
+    "tape": {
+      ".jpg": 5100,
+      ".png": 1443
+    },
+    "toy": {
+      ".jpg": 5025,
+      ".png": 2190
+    },
+    "transistor1": {
+      ".jpg": 5000,
+      ".png": 2117
+    },
+    "zipper": {
+      ".jpg": 5005,
+      ".png": 2331
+    },
+    "wooden_beads": {
+      ".jpg": 5005,
+      ".png": 1684
+    },
+    "usb": {
+      ".jpg": 5050,
+      ".png": 1754
+    },
+    "usb_adaptor": {
+      ".jpg": 5015,
+      ".png": 1520
+    },
+    "eraser": {
+      ".jpg": 5065,
+      ".png": 1488
+    }
+  },
+  "zero_byte": [],
+  "samples": [
+    "dataset/phone_battery/OK/S0094/phone_battery_0094_OK_C1_20230918103111.jpg",
+    "dataset/phone_battery/OK/S0094/phone_battery_0094_OK_C2_20230918103111.jpg",
+    "dataset/phone_battery/OK/S0094/phone_battery_0094_OK_C5_20230918103111.jpg",
+    "dataset/phone_battery/OK/S0094/phone_battery_0094_OK_C3_20230918103111.jpg",
+    "dataset/phone_battery/NG/PS/S0094/phone_battery_0094_NG_PS_C3_20230919115211.png",
+    "dataset/phone_battery/NG/PS/S0094/phone_battery_0094_NG_PS_C1_20230919115211.png",
+    "dataset/phone_battery/NG/PS/S0094/phone_battery_0094_NG_PS_C4_20230919115211.png",
+    "dataset/phone_battery/NG/PS/S0094/phone_battery_0094_NG_PS_C5_20230919115211.png"
+  ],
+  "bytes": 58791659189,
+  "elapsed": 2.8920552730560303
+}

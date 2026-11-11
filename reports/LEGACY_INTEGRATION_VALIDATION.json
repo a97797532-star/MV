@@ -1,0 +1,7 @@
+{
+  "resolution_function_source_sha256_before": "ae495eb3bf4a0af11cefaf0e0b6e3849b93a10f69d7a058e4c99fbfa1e9e5caf",
+  "resolution_function_source_sha256_after": "ae495eb3bf4a0af11cefaf0e0b6e3849b93a10f69d7a058e4c99fbfa1e9e5caf",
+  "resolution_math_changed": false,
+  "reused_component_backend": "legacy/windows_snapshot/RealIAD_OpenCV_Analysis_Assignment_v2/RealIAD_OpenCV/backend.py",
+  "preserved_split_adapter": "mv_analysis/splits.py"
+}

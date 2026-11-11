@@ -1,0 +1,10 @@
+{
+  "images": 300,
+  "columns": 107,
+  "reference_workers": 1,
+  "candidate_workers": 4,
+  "all_fields_exact_equal": true,
+  "opencv_rng_seed": 42,
+  "scope": "300 stratified real images across 30 categories/C1-C5/OK-NG; scalar fields exact, missing values matched",
+  "full_dataset_parallel_equivalence_not_independently_recomputed": true
+}

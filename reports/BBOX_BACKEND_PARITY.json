@@ -1,0 +1,8 @@
+{
+  "sampled_masks": 336,
+  "checked_masks": 333,
+  "unresolved_type_masks_excluded": 3,
+  "errors": [],
+  "success": true,
+  "scope": "Stratified actual masks across all categories; independent pixel component re-extraction compared to saved CSV, not full mask recomputation"
+}

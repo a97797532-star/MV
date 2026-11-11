@@ -1,0 +1,24 @@
+[project]
+name = "realiad-five-view"
+version = "0.1.0"
+description = "Reproducible five-view inspection experiment environment"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "torch", "torchvision", "numpy", "scipy", "scikit-learn", "pandas",
+  "Pillow", "opencv-python", "matplotlib", "seaborn", "tqdm", "PyYAML",
+  "psutil", "timm", "einops", "transformers", "safetensors",
+  "torchmetrics", "pycocotools",
+  "openai", "pydantic", "python-dotenv", "fastapi", "uvicorn",
+  "sqlalchemy", "aiosqlite", "streamlit", "plotly",
+]
+[tool.uv]
+package = false
+cache-dir = ".uv-cache"
+environments = ["sys_platform == 'win32' and platform_machine == 'AMD64'"]
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
