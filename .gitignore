@@ -1,0 +1,83 @@
+# ==========================================
+# Python / uv
+# ==========================================
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.uv_cache/
+.coverage
+htmlcov/
+
+# ==========================================
+# Jupyter
+# ==========================================
+.ipynb_checkpoints/
+.virtual_documents/
+
+# ==========================================
+# Real-IAD Dataset
+# ==========================================
+dataset/
+datasets/
+data/raw/
+data/external/
+Real-IAD/
+RealIAD/
+
+# ==========================================
+# Analysis Outputs
+# ==========================================
+outputs/
+results/
+notebook_results_real/
+runs/
+logs/
+wandb/
+mlruns/
+
+# ==========================================
+# Model Weights / Checkpoints
+# ==========================================
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.engine
+*.h5
+
+# ==========================================
+# Secrets / Local Configuration
+# ==========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+config.local.yaml
+config.local.json
+
+# ==========================================
+# OS / IDE
+# ==========================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# ==========================================
+# Temporary Files
+# ==========================================
+tmp/
+temp/
+*.tmp
+*.log
