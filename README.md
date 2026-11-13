@@ -1,6 +1,133 @@
 # MV — Real-IAD 5시점 제조 외관검사
 
-WSL2 Ubuntu, Python 3.12, uv, CPU PyTorch를 기본으로 메타데이터·밝기·불량 위치·객체 라벨·원본 JPG 해상도 손실을 분석한다. 원본은 읽기 전용으로 사용하고 결과는 실행별 outputs 폴더에 보관한다. 모델 학습, GAN 학습, 데이터/가중치 다운로드 기능은 포함하지 않는다.
+WSL2 Ubuntu, Python 3.12, uv, CPU PyTorch를 기본으로 메타데이터·밝기·불량 위치·객체 라벨·원본 JPG 해상도 손실을 분석한다. 원본은 읽기 전용으로 사용하고 결과는 실행별 outputs 폴더에 보관한다. 이 분석 경로는 모델 학습을 수행하지 않는다. 모델 실험 준비 절차는 아래 별도 가이드를 따른다.
+
+## 처음 읽는 팀원 안내
+
+- **[현재 진행 상태와 다음 작업](docs/team/PROJECT_STATUS.md)**: 분석·재검수·로더가 어디까지 완료됐는지, 지금 남은 검증과 담당 작업.
+- **[팀원 시작하기 — GitHub Fork 사용자](#팀원-시작하기--github-fork-사용자)**: 아래 빠른 시작.
+- [Fork 상세 실습](docs/team/GITHUB_FORK_WORKFLOW.md) · [설치/로더 체크리스트](docs/team/ONBOARDING_CHECKLIST.md) · [기여 규칙](docs/team/CONTRIBUTING.md)
+- **[모델 실험 시작 절차](docs/team/MODEL_EXPERIMENT_WORKFLOW.md)**: 공식 소스 Clone·커밋 고정 → 독립 환경 → 공통 로더 연결 → 입력 Smoke → 학습/평가 → PR.
+- [오류 복구](docs/team/TROUBLESHOOTING.md) · [관리자 PR/Canonical 배포](docs/team/MAINTAINER_GUIDE.md)
+
+현재 공통 Single/Five-view 로더와 12개 독립 입력 Adapter가 구현됐다. 12개 모델 학습 통합/성능 비교는 아직 실행하지 않았다. `models/`와 `src/` 학습 폴더가 현재 존재한다고 가정하지 않는다. 기존 구조 표준화 작업은 보존하며 이번 변경은 문서 연결 작업이다.
+
+## 팀원 시작하기 — GitHub Fork 사용자
+
+```text
+                   원본 whrjsdnr/MV
+                          │ Fork
+              ┌───────────┼───────────┐
+              ▼           ▼           ▼
+            팀원 A       팀원 B       팀원 C
+            개인 Fork    개인 Fork    개인 Fork
+              │ Clone     │ Clone     │ Clone
+              ▼           ▼           ▼
+            로컬 PC      로컬 PC      로컬 PC
+              └── Push → 각자의 Fork 기능 브랜치
+                          │ Pull Request
+                          ▼
+                 리뷰·관리자 Merge → 원본 main
+```
+
+Fork는 **GitHub 안의 개인 복사본**, Clone은 **내 PC로 복제**다. 팀원은 `origin=개인 Fork`, `upstream=원본 MV`로 사용한다. Branch는 기능 작업 공간, Commit은 로컬 변경 이력, Push는 원격 업로드, Fetch는 원격 이력 조회·갱신, Pull은 가져오기와 통합, PR은 원본 반영 요청, Merge는 변경 통합이다. Conflict는 자동 통합이 안 되는 충돌이다. 자세한 용어/성공 출력/실패 대응은 [Fork 가이드](docs/team/GITHUB_FORK_WORKFLOW.md)에 있다.
+
+### 1. 개인 Fork Clone과 upstream
+
+WSL2 Ubuntu에서 실행한다. `<내-GitHub-ID>`는 **실제 본인 계정으로 바꾼 후** 사용한다.
+
+```bash
+# MV를 둘 상위 폴더에서
+git clone https://github.com/<내-GitHub-ID>/MV.git
+cd MV
+git remote -v
+# upstream이 없을 때만 추가
+git remote add upstream https://github.com/whrjsdnr/MV.git
+git remote -v
+```
+
+Clone은 새 MV 폴더를 만들고 cd는 그 프로젝트로 이동한다. origin의 fetch/push는 개인 Fork, upstream은 원본 URL이어야 한다. 이미 등록됐으면 add를 반복하지 않는다. upstream push URL 표시가 직접 Push하라는 뜻은 아니다. **팀원은 upstream 직접 Push 금지**. Git 설치·작성자 설정과 GitHub CLI/GCM 인증, Clone 오류는 [상세 가이드 1~2절](docs/team/GITHUB_FORK_WORKFLOW.md)을 따른다. 비밀번호/토큰은 코드에 저장하지 않는다.
+
+### 2. 환경과 데이터 로더
+
+이후 명령은 Clone한 MV 루트에서 실행한다. uv가 없으면 [Ubuntu 설치](docs/INSTALL_LINUX.md)를 먼저 따른다.
+
+```bash
+uv python install 3.12
+uv sync --locked
+uv run --locked python --version
+uv run --locked python scripts/validate_environment.py --dummy
+uv run --locked pytest -q
+export REALIAD_DATA_ROOT="/본인/Real-IAD/루트"
+```
+
+순서대로 Python 확보→lock 고정 환경 설치→3.12 확인→CPU dummy 검증→테스트→현재 터미널의 로컬 데이터 경로 설정이다. 성공은 Python3.12, failed=[], pytest passed다. 설치 실패 시 lock을 재생성하지 말고 [오류 해결](docs/team/TROUBLESHOOTING.md)을 따른다.
+
+**데이터와 전체 Crop CSV는 Clone으로 내려오지 않는다.** 팀이 승인한 Canonical Manifest·annotation·BBox·classes를 별도로 수령하고 hash를 대조한다. 최신 갱신 Crop은 reviewed_v2이며 검증 범위는 [진행 상태](docs/team/PROJECT_STATUS.md)에 명시했다. 실제 [데이터 검증·로더 실행 예제](docs/team/ONBOARDING_CHECKLIST.md)를 따라 개인 data_root로 로드한다. 기존 v1 eligibility를 새 v2 검증 결과로 혼동하지 않는다.
+
+### 3. 매일 동기화 → 새 브랜치
+
+미커밋 변경이 있으면 먼저 기능 브랜치에 Commit하거나 안전하게 보관한다. clean 상태의 MV 루트:
+
+```bash
+git status
+git fetch upstream
+git switch main
+git merge --ff-only upstream/main
+git log --oneline --left-right main...upstream/main
+git push origin main
+git switch -c feature/anomaly-patchcore
+```
+
+Fetch는 작업 파일을 합치지 않으며 ff-only는 이력이 갈라지지 않았을 때만 main을 갱신한다. log로 차이를 확인한 뒤 개인 Fork main을 갱신한다. 실패하면 강제로 Reset/Push하지 않는다. 새 브랜치는 작업 내용에 맞춰 이름을 바꾼다. [안전한 복구](docs/team/TROUBLESHOOTING.md)를 참고한다.
+
+### 4. 파일 수정 → Stage → Commit → 개인 Fork Push
+
+실제 존재하는 공통 Adapter 수정 예시다. 파일을 편집기로 저장한 뒤 MV 루트:
+
+```bash
+git status
+uv run --locked pytest -q
+git add mv_analysis/data/adapters.py tests/test_data_loading.py
+git diff --cached
+git commit -m "feat: improve PatchCore input adapter"
+git push -u origin feature/anomaly-patchcore
+```
+
+add는 지정 파일을 다음 Commit 대상으로 Stage하고, commit은 로컬 이력을 저장한다. push는 개인 Fork 브랜치에 올린다. Commit만으로 공유되지 않고 Push만으로 원본에 반영되지 않는다. cached diff에서 데이터/개인 설정이 섞이지 않았는지 확인한다. `git add .`를 무조건 사용하지 않는다. 모델 학습 코드를 추가하려면 [공식 코드 Clone 이후 단계](docs/team/MODEL_EXPERIMENT_WORKFLOW.md)를 먼저 따른다.
+
+### 5. PR과 Merge된 코드 받기
+
+개인 Fork 웹 → Compare & pull request → **base whrjsdnr/MV:main**, **head 본인Fork:기능브랜치** 확인 → 변경/실제 테스트 결과 작성 → Create pull request → 팀 리뷰 → 관리자 Merge. [PR 템플릿](.github/PULL_REQUEST_TEMPLATE.md)을 사용한다. 권한/화면별 상세 절차는 [Fork 가이드 6절](docs/team/GITHUB_FORK_WORKFLOW.md)에 있다.
+
+Merge 뒤에는 3절의 status/fetch/switch/ff-only/push 순서로 main을 갱신하고 새 기능 브랜치를 만든다. 계속 진행 중인 기능 브랜치는 clean 상태에서 `git fetch upstream` 후 **기능 브랜치에서** `git merge upstream/main`으로 통합하고 테스트한다. [충돌 해결](docs/team/GITHUB_FORK_WORKFLOW.md)을 먼저 읽는다.
+
+### 매일 쓰는 Git 명령 요약
+
+장소는 모두 MV 루트이며 변경 전에 status를 읽는다.
+
+| 명령 | 목적 / 성공 확인 | 실패 시 참고 |
+|---|---|---|
+| git status | 현재 브랜치·변경·Stage 상태 | [복구 A/B](docs/team/TROUBLESHOOTING.md) |
+| git fetch upstream | 원본 원격 이력 갱신, 오류 없이 종료 | 인증/URL 확인 |
+| git switch main | main 전환 | 변경을 먼저 보존 |
+| git merge --ff-only upstream/main | main을 원본 최신으로, Fast-forward/Already up to date | 분기 이력 확인, 강제 금지 |
+| git switch -c 기능브랜치 | 새 브랜치 생성/이동 | 기존 이름 확인 |
+| git add 지정경로 | 필요한 파일만 Stage | 경로/ignore 확인 |
+| git diff --cached | 다음 Commit의 실제 변경 검토 | 불필요 파일은 Stage 취소 |
+| git commit -m "설명" | 로컬 이력 저장, hash 출력 | 작성자/Stage 확인 |
+| git push -u origin 기능브랜치 | 개인 Fork 업로드 | [Push 거절 복구](docs/team/TROUBLESHOOTING.md) |
+| git merge upstream/main | 작업 브랜치에 원본 변경 통합 | 충돌은 협의 후 편집·Stage·Commit |
+
+초보 실습은 [문서 한 장으로 PR 흐름 익히기](docs/team/GITHUB_FORK_WORKFLOW.md)를 따른다. 연습 PR은 합의 없이 원본에 Merge하지 않는다.
+
+## Git 공유 범위
+
+코드·모델 Config·테스트·README·팀 문서·pyproject.toml·uv.lock은 검토 후 공유한다. 소형 합성 Manifest/스키마는 권한과 내용 확인 후 후보가 될 수 있다. 원본 JPG/PNG·대형 가중치·.venv·.env·개인 경로 설정·캐시·대형 학습 로그·API 키는 올리지 않는다. **전체 Manifest와 사람 승인 기록은 자동 공개하지 않는다.** `.gitignore`는 이미 추적한 파일의 공개를 취소하지 않는다. [기여 규칙](docs/team/CONTRIBUTING.md)과 [관리자 배포 가이드](docs/team/MAINTAINER_GUIDE.md)를 따른다.
+
+## 기존 분석 실행 및 보존 기록
+
+아래는 기존 분석 사용법과 결과 링크다. 최신 검수·로더 상태 판단은 위 [현재 진행 상태](docs/team/PROJECT_STATUS.md)를 우선한다. 기존 해상도 전수 계산이나 Crop 연구를 팀 설치 과정에서 반복할 필요는 없다.
 
 ```bash
 # WSL2 Ubuntu 터미널, clone한 MV 루트
