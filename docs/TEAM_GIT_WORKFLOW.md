@@ -1,5 +1,7 @@
 # 4명 협업 규칙
 
+> 개인 Fork를 사용하는 팀원은 새 [Fork 협업 절차](team/GITHUB_FORK_WORKFLOW.md)와 [현재 진행 상태](team/PROJECT_STATUS.md)를 먼저 확인하세요. 이 문서의 원본 직접 Clone 예시는 관리자/직접 접근 방식이며, Fork 팀원은 origin=개인 Fork, upstream=원본으로 설정합니다.
+
 main은 검증된 코드만 유지한다. 모든 팀원은 개인 작업 브랜치를 만들고 기능 단위로 commit, push, PR을 작성한다. 가능하면 작성자 외 1명이 리뷰하고 main에 합친다. 테스트가 실패한 PR은 원인과 영향이 합의되기 전 merge하지 않는다. 저장소 관리자가 main 보호/PR 필수/리뷰 1명 설정을 검토한다. 이 작업에서 GitHub 설정을 변경하지 않았다.
 
 ```text
@@ -34,7 +36,7 @@ git commit -m "Describe the behavior change"
 git push -u origin feature/작업-본인
 ```
 
-PR 설명은 `.github/pull_request_template.md`를 채우고 테스트 실제 결과와 입력 범위를 적는다. 리뷰어는 split 누수·train 전용 통계·마스크 정책·좌표·원본 보호·수치 근거를 확인한다. main으로 합친 후 각자 pull한다. 작업 중 수정이 있으면 초보자 가이드 J/K 절을 먼저 따른다.
+PR 설명은 `.github/PULL_REQUEST_TEMPLATE.md`를 채우고 테스트 실제 결과와 입력 범위를 적는다. 리뷰어는 split 누수·train 전용 통계·마스크 정책·좌표·원본 보호·수치 근거를 확인한다. main으로 합친 후 각자 pull한다. 작업 중 수정이 있으면 초보자 가이드 J/K 절을 먼저 따른다.
 
 ## 비공개 저장소와 인증
 

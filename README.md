@@ -58,10 +58,13 @@ uv sync --locked
 uv run --locked python --version
 uv run --locked python scripts/validate_environment.py --dummy
 uv run --locked pytest -q
+uv run --locked python scripts/smoke_test_shared_data.py --synthetic
 export REALIAD_DATA_ROOT="/본인/Real-IAD/루트"
 ```
 
 순서대로 Python 확보→lock 고정 환경 설치→3.12 확인→CPU dummy 검증→테스트→현재 터미널의 로컬 데이터 경로 설정이다. 성공은 Python3.12, failed=[], pytest passed다. 설치 실패 시 lock을 재생성하지 말고 [오류 해결](docs/team/TROUBLESHOOTING.md)을 따른다.
+
+합성 Smoke는 외부 데이터 없이 Single/Five-view·마스크 상태·12개 입력 변환을 확인한다. [코드 배포·Canonical 수령 안내](docs/team/CODE_RELEASE.md)를 참고한다.
 
 **데이터와 전체 Crop CSV는 Clone으로 내려오지 않는다.** 팀이 승인한 Canonical Manifest·annotation·BBox·classes를 별도로 수령하고 hash를 대조한다. 최신 갱신 Crop은 reviewed_v2이며 검증 범위는 [진행 상태](docs/team/PROJECT_STATUS.md)에 명시했다. 실제 [데이터 검증·로더 실행 예제](docs/team/ONBOARDING_CHECKLIST.md)를 따라 개인 data_root로 로드한다. 기존 v1 eligibility를 새 v2 검증 결과로 혼동하지 않는다.
 

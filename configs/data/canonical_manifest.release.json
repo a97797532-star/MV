@@ -1,0 +1,35 @@
+{
+  "release_id": "reviewed-v2-filename-class-v1",
+  "distribution": "PRIVATE_TEAM_TRANSFER_ONLY_NOT_IN_GIT",
+  "public_redistribution_permission": "UNVERIFIED",
+  "data_root_environment": "REALIAD_DATA_ROOT",
+  "rows": 151050,
+  "coordinate_format": "XYXY_EXCLUSIVE_ORIGINAL_PIXELS",
+  "validation_scope": "All v2 coordinates/groups/approval matches and changed 43 masks checked; full v2 target eligibility not frozen",
+  "files": {
+    "manifest": {
+      "suggested_relative_path": "outputs/adaptive_crop_full_v1/preprocessing_metadata_reviewed_v2.csv",
+      "bytes": 118417033,
+      "sha256": "d1c13cae3fc352f457cb22f9955280e0ce140827a449465d5e05519fd6c9073d"
+    },
+    "annotations": {
+      "suggested_relative_path": "outputs/filename_class_resolution_v1/image_metadata_with_split.csv",
+      "bytes": 49827748,
+      "sha256": "54c17f59240ed917a8801afe6512faade98df5e7f3e26139d718b9eba20e1620"
+    },
+    "bboxes": {
+      "suggested_relative_path": "outputs/filename_class_resolution_v1/defect_bboxes.csv",
+      "bytes": 8222579,
+      "sha256": "59f7b8ef951660b2a4e2bb7b909ce3a5c43e064a78256d4809505e16db11e71c"
+    },
+    "classes": {
+      "suggested_relative_path": "outputs/spatial_20261111_v7/classes.json",
+      "bytes": 321,
+      "sha256": "80e11e41b61ab61e2e9b4acbb4daad28afc623d53070e957e107304bcf59aa80"
+    }
+  },
+  "contains_images": false,
+  "contains_approval_ledger": false,
+  "descriptor_contains_personal_absolute_paths": false,
+  "private_payload_may_contain_absolute_paths_and_reviewer_fields": true
+}

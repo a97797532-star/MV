@@ -1,5 +1,7 @@
 # MV 프로젝트 Git·GitHub 첫 실습
 
+> 개인 Fork를 사용하는 팀원은 새 [Fork 협업 절차](team/GITHUB_FORK_WORKFLOW.md)와 [현재 진행 상태](team/PROJECT_STATUS.md)를 먼저 확인하세요. 이 문서의 원본 직접 Clone 예시는 관리자/직접 접근 방식이며, Fork 팀원은 origin=개인 Fork, upstream=원본으로 설정합니다.
+
 이 문서는 Ubuntu 터미널을 처음 쓰는 팀원도 명령을 한 줄씩 실행하도록 작성했다. `본인이름`, 이메일, 브랜치명은 자기 정보로 바꾼다. `$` 프롬프트는 입력하지 않는다. 데이터셋과 비밀정보를 실습 파일에 쓰지 않는다.
 
 ## A. 개념을 프로젝트에 연결하기

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MV saved crop manifest row (required shared-loader geometry fields)",
+  "type": "object",
+  "description": "Synthetic/schema only; no real images, paths or approval records. Cross-field bounds, crop-size equality, uniqueness and split leakage are checked by ManifestIndex.",
+  "required": [
+    "image_id",
+    "product_id",
+    "category",
+    "view",
+    "split",
+    "original_path",
+    "source_relative_path",
+    "original_width",
+    "original_height",
+    "crop_x0",
+    "crop_y0",
+    "crop_x1",
+    "crop_y1",
+    "crop_width",
+    "crop_height",
+    "coordinate_format",
+    "selected_policy",
+    "policy_version",
+    "source_fingerprint"
+  ],
+  "properties": {
+    "image_id": {
+      "type": "string"
+    },
+    "product_id": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "original_path": {
+      "type": "string"
+    },
+    "source_relative_path": {
+      "type": "string"
+    },
+    "selected_policy": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "source_fingerprint": {
+      "type": "string"
+    },
+    "original_width": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "original_height": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "crop_x0": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "crop_y0": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "crop_x1": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "crop_y1": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "crop_width": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "crop_height": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "view": {
+      "enum": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ]
+    },
+    "split": {
+      "enum": [
+        "train",
+        "validation",
+        "test"
+      ]
+    },
+    "coordinate_format": {
+      "const": "XYXY_EXCLUSIVE_ORIGINAL_PIXELS"
+    }
+  },
+  "additionalProperties": true
+}

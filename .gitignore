@@ -83,3 +83,12 @@ temp/
 *.log
 
 .uv-cache/
+
+# Internal-only crop reports contain dataset example pixels; keep them local.
+/reports/YOLO11_CROP_RESULT_REPORT*
+/reports/COMBINED_CROP_RESULT_REPORT*
+/reports/OBJECT_AWARE_CROP_COMPARISON_REPORT*
+
+/reports/ADAPTIVE_CROP_QUALITY_GATE_REPORT*
+
+/reports/FULL_DATASET_ADAPTIVE_CROP_REPORT*

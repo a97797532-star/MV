@@ -1,5 +1,7 @@
 # 팀원별 Ubuntu 재현 실습
 
+> 개인 Fork를 사용하는 팀원은 새 [Fork 협업 절차](team/GITHUB_FORK_WORKFLOW.md)와 [현재 진행 상태](team/PROJECT_STATUS.md)를 먼저 확인하세요. 이 문서의 원본 직접 Clone 예시는 관리자/직접 접근 방식이며, Fork 팀원은 origin=개인 Fork, upstream=원본으로 설정합니다.
+
 각 팀원이 자기 WSL2 Ubuntu에서 실행한다. 4명이 같은 코드를 쓴다는 것과 실제 설치에 성공했다는 것은 다르다. 마지막 표는 본인이 실행한 증거로만 갱신한다. Ubuntu 자체가 없다면 [INSTALL_LINUX.md](INSTALL_LINUX.md)를 먼저 따른다.
 
 ## STEP 1. Ubuntu 실행
