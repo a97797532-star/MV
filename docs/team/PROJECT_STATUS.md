@@ -18,7 +18,7 @@
 | 공통 로더 | Single/Five-view, 좌표/마스크/BBox 변환, 결측/검출 적격 계약, collate | VERIFIED: 합성 및 기존 실제315장 Smoke/12Adapter360입력 사례. 새 v2 전체 타깃 계약/eligibility 독립 산출은 미완료 | reports/DATA_LOADER_IMPLEMENTATION.md |
 | 12모델 Adapter | 독립 입력 변환 구현 | 모델 실제 forward/학습통합은 UNVERIFIED. 이중CenterCrop/Normalize 주의 | mv_analysis/data/adapters.py, reports/MODEL_INPUT_REQUIREMENTS.md |
 | 모델 학습 | 공식 소스 조사·커밋·입력 근거 수집 | NOT_RUN: 12모델 비교 학습/평가/선정 미실시. 과거 YOLO Crop 추론 실험과 구분 | MODEL_EXPERIMENT_WORKFLOW.md |
-| 저장소 표준화 | 분석/로더 실제 패키지는 mv_analysis/, scripts/, tests/ | NOT_IMPLEMENTED: models/·src/·통합학습train.py 없음. 폴더 이동은 이번에 하지 않음 | 실제 디렉터리 확인 |
+| 저장소 표준화 | 분석/로더 실제 패키지는 mv_analysis/, scripts/, tests/ | models/에는 계약·TODO만 추가됨. 실제 학습train.py와 src/는 없음. 기존 코드는 이동하지 않음 | 실제 디렉터리 확인 |
 | Fork 공유 | README/팀 문서/PR 템플릿 추가 | 로컬 문서 VERIFIED. 각 팀원의 인증/Push/PR 실습과 관리자 보호설정은 UNVERIFIED | 이 문서 묶음 |
 
 ### 현재 Crop v2 식별자
@@ -31,7 +31,7 @@ SHA-256 d1c13cae3fc352f457cb22f9955280e0ce140827a449465d5e05519fd6c9073d
 최신 사람 Crop 승인:1,594 (원본 전체 승인 포함)
 ```
 
-v1의 상세 전수 디코딩 결과는 [기존 최종 검증 보고서](../../reports/FINAL_PREPROCESSING_VALIDATION.md)에 있다. 이번 작업에서는 **v2 전체 이미지 디코딩/모든 타깃 변환을 다시 실행하지 않았다**. 원본 좌표·그룹 무결성과 승인 대조, 바뀐43장 마스크 보존을 확인했다. 따라서 v1의 hash/eligibility 결과를 그대로 v2의 완료 증거라고 제출하지 않는다. v1 대비 새 v2에서 실제 클래스/마스크 계약을 확정한 학습 적격 테이블은 모델 학습 전 별도 고정해야 한다.
+v1의 상세 전수 디코딩 결과는 내부 보고서 `reports/FINAL_PREPROCESSING_VALIDATION.md`에 있다(관리자 별도 전달). 이번 작업에서는 **v2 전체 이미지 디코딩/모든 타깃 변환을 다시 실행하지 않았다**. 원본 좌표·그룹 무결성과 승인 대조, 바뀐43장 마스크 보존을 확인했다. 따라서 v1의 hash/eligibility 결과를 그대로 v2의 완료 증거라고 제출하지 않는다. v1 대비 새 v2에서 실제 클래스/마스크 계약을 확정한 학습 적격 테이블은 모델 학습 전 별도 고정해야 한다.
 
 클래스 파생 파일은 `outputs/filename_class_resolution_v1/`다. 7장 클래스 오류를 해결한 v1 기반 전체 계약은 SUPERVISED_VALID51,295 / OK_NEGATIVE72,840 / MISSING_ANNOTATION26,881 / EMPTY_NG_REVIEW34다. 클래스 충돌 해결과 Crop v2 검증 버전은 서로 다른 버전 축이다.
 
@@ -62,7 +62,7 @@ v1의 상세 전수 디코딩 결과는 [기존 최종 검증 보고서](../../r
 - GitHub 인증/Clone/Push/PR/Merge, 새 Python 설치, 모델 Clone/설치/학습 명령은 이번 작업에서 실행하지 않았다.
 - 원본 데이터/승인Ledger/기존Manifest/uv.lock은 문서 작업에서 수정하지 않았다.
 
-기존 전체 진행 보고서: [분석 종합](../../reports/DATA_ANALYSIS_MASTER_REPORT.md), [로더 구현](../../reports/DATA_LOADER_IMPLEMENTATION.md), [클래스 해결](../../reports/FILENAME_CLASS_RESOLUTION.md). 일부 보고서의 대형근거파일/내부PDF는 Git에서 제외돼 로컬 관리자 환경에만 존재할 수 있다.
+기존 전체 진행 보고서는 내부 자료 `reports/DATA_ANALYSIS_MASTER_REPORT.md`, `reports/DATA_LOADER_IMPLEMENTATION.md`, `reports/FILENAME_CLASS_RESOLUTION.md`를 관리자에게 별도로 수령한다. 이 내부 자료와 대형 근거 파일·PDF는 이번 Git 배포에 포함하지 않는다.
 
 이번 README/협업 문서의 명령·링크·실제 로더 검증 범위는 [문서 검증 기록](DOCUMENTATION_VALIDATION.md)을 참고한다.
 
@@ -73,3 +73,9 @@ v1의 상세 전수 디코딩 결과는 [기존 최종 검증 보고서](../../r
 - 새 명령: `uv run --locked python scripts/smoke_test_shared_data.py --synthetic`. 비공개 데이터가 없어도 실행할 수 있다.
 - 전체 Canonical CSV/승인 Ledger/이미지/가중치는 Git 배포 대상에서 제외했다. [배포 검증 기록](../../reports/CODE_RELEASE_PREPARATION.md)과 [수령 안내](CODE_RELEASE.md)를 따른다.
 - 사용자가 Push를 승인했다. 실제 원격 반영 여부는 GitHub main Commit을 확인한다.
+
+## 공통 실험 인프라 추가 작업
+
+공통 Recorder·이상탐지/검출 평가·Benchmark·시각화·Markdown/모델 비교 코드를 `mv_analysis/experiments/`에 추가했다. `models/`의 12개 모델별 계약과 TODO는 실제 모델 학습 구현이 아니다. 상세 검증 범위는 [실험 규약](../experiments/EXPERIMENT_PROTOCOL.md)과 [인프라 구현 검증](../../reports/experiments/INFRASTRUCTURE_VALIDATION.md)에 기록한다. 구현 단계에서는 Commit/Push를 수행하지 않았으며, 이후 사용자 승인에 따른 코드 배포 범위는 [배포 검증 기록](../../reports/experiments/RELEASE_VALIDATION.md)을 따른다.
+
+최종 공통 인프라 검사: 기존145개+새40개=185개 pytest 통과, 합성12Run/실제입력10장계약검사 통과. 실제모델학습·GPU측정은미실행이며 [검증 기록과 예제](../../reports/experiments/INFRASTRUCTURE_VALIDATION.md)를참고한다. GitHub에는추론/연결코드·설정·보고서를공유하고weights는별도수령한다.

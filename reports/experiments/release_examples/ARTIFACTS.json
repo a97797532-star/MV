@@ -1,0 +1,43 @@
+{
+  "data_kind": "SYNTHETIC",
+  "actual_model_training": false,
+  "description": "기존 합성 산출물의 선별 복사. source_file은 로컬 출처 기록이며 배포 파일은 file에 표시.",
+  "figures": [
+    {
+      "file": "figures/anomaly_loss.png",
+      "source_file": "reports/experiments/examples/SYNTHETIC_ANOMALY/figures/report_2/loss.png",
+      "bytes": 44720,
+      "sha256": "ee867312f4699eb42817a2544a3f01461c163090f5a0e5b156cddf29134f97b5"
+    },
+    {
+      "file": "figures/anomaly_roc.png",
+      "source_file": "reports/experiments/examples/SYNTHETIC_ANOMALY/figures/report_2/test_image_roc.png",
+      "bytes": 21246,
+      "sha256": "e76c370058c8652aac48d19ba9704020b9b9efd7228372fed0ac33f66f720cab"
+    },
+    {
+      "file": "figures/anomaly_false_negative.png",
+      "source_file": "reports/experiments/examples/SYNTHETIC_ANOMALY/figures/cases/test_NG_C3.png",
+      "bytes": 51210,
+      "sha256": "78b4a138f63170b822bc2db28534d69449ca511b4e25d52ca96716d5e40fb2df"
+    },
+    {
+      "file": "figures/detection_loss.png",
+      "source_file": "reports/experiments/examples/SYNTHETIC_DETECTION/figures/report_2/loss.png",
+      "bytes": 44304,
+      "sha256": "ff28384a1cb481a4c25871b90cfef181e8a96a5d261c9c107cb413d51f53c2cd"
+    },
+    {
+      "file": "figures/detection_confusion.png",
+      "source_file": "reports/experiments/examples/SYNTHETIC_DETECTION/figures/report_2/test_confusion.png",
+      "bytes": 34095,
+      "sha256": "f53ebf608ab2ec96da11aeb4cd712cd55b731f725d40345fc990bbb612e44957"
+    },
+    {
+      "file": "figures/detection_class_error.png",
+      "source_file": "reports/experiments/examples/SYNTHETIC_DETECTION/figures/cases_v2/test_NG_C2.png",
+      "bytes": 38497,
+      "sha256": "6f1c39cbd7f9840f647117badb8c1100c10f3bfa2ef13ab4222c5367ca45583b"
+    }
+  ]
+}

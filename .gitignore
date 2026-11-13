@@ -92,3 +92,13 @@ temp/
 /reports/ADAPTIVE_CROP_QUALITY_GATE_REPORT*
 
 /reports/FULL_DATASET_ADAPTIVE_CROP_REPORT*
+
+# Model handoff: keep weights, memory banks and search indices out of Git.
+models/**/*.bin
+models/**/*.faiss
+models/**/*.index
+models/**/weights/
+models/**/checkpoints/
+models/**/memory_bank/
+models/**/search_index/
+models/**/memory_bank*.npy

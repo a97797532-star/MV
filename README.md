@@ -7,10 +7,35 @@ WSL2 Ubuntu, Python 3.12, uv, CPU PyTorch를 기본으로 메타데이터·밝�
 - **[현재 진행 상태와 다음 작업](docs/team/PROJECT_STATUS.md)**: 분석·재검수·로더가 어디까지 완료됐는지, 지금 남은 검증과 담당 작업.
 - **[팀원 시작하기 — GitHub Fork 사용자](#팀원-시작하기--github-fork-사용자)**: 아래 빠른 시작.
 - [Fork 상세 실습](docs/team/GITHUB_FORK_WORKFLOW.md) · [설치/로더 체크리스트](docs/team/ONBOARDING_CHECKLIST.md) · [기여 규칙](docs/team/CONTRIBUTING.md)
+- **[공통 실험·평가 규약](docs/experiments/EXPERIMENT_PROTOCOL.md)** · [모델별 담당 TODO](models/README.md)
 - **[모델 실험 시작 절차](docs/team/MODEL_EXPERIMENT_WORKFLOW.md)**: 공식 소스 Clone·커밋 고정 → 독립 환경 → 공통 로더 연결 → 입력 Smoke → 학습/평가 → PR.
 - [오류 복구](docs/team/TROUBLESHOOTING.md) · [관리자 PR/Canonical 배포](docs/team/MAINTAINER_GUIDE.md)
 
-현재 공통 Single/Five-view 로더와 12개 독립 입력 Adapter가 구현됐다. 12개 모델 학습 통합/성능 비교는 아직 실행하지 않았다. `models/`와 `src/` 학습 폴더가 현재 존재한다고 가정하지 않는다. 기존 구조 표준화 작업은 보존하며 이번 변경은 문서 연결 작업이다.
+현재 공통 Single/Five-view 로더와 12개 독립 입력 Adapter가 구현됐다. 12개 모델 학습 통합/성능 비교는 아직 실행하지 않았다. `models/`에는 이번에 모델별 계약·TODO 인터페이스를 추가했으며 실제 학습 코드는 아직 없다. 공통 실험 인프라는 `mv_analysis/experiments/`에 있다.
+
+## 공통 실험·평가·Markdown 보고 시스템
+
+**팀원 결과 제출 공지: GitHub에는 추론/모델 연결 코드·실행 설정·Markdown 결과보고서·공유 가능한 그래프를 올립니다. 모델 가중치·체크포인트·메모리 뱅크·검색 인덱스는 올리지 않습니다.** 가중치는 팀 내 별도 채널로 받고, 보고서에는 파일명·크기·SHA-256·수령 방법만 남깁니다. 비밀 URL/토큰/개인 경로는 공개하지 않습니다.
+
+- [공통 실험 규약](docs/experiments/EXPERIMENT_PROTOCOL.md): Recorder, 이상탐지/검출 평가, 원본 좌표 복원, Validation Threshold, Benchmark와 비교 조건
+- [구현 검증·합성 보고서 예제](reports/experiments/INFRASTRUCTURE_VALIDATION.md): 실제 모델 성능과 구분한 검사 결과
+- [4명 모델 배분·완료 기준](docs/team/MODEL_EXPERIMENT_ASSIGNMENT_GUIDE.md)
+- [모델별 작업 영역](models/README.md): 12개 모델의 전처리·학습·평가 계약과 명시적 미구현 TODO
+
+GPU 학습은 담당 팀원의 독립 환경에서 수행합니다. 공통 코드는 CPU 합성 자료로 검증할 수 있으며 실제 12개 모델 학습을 대신하지 않습니다. 기존 로더·승인 Crop·Split은 그대로 사용합니다.
+
+```bash
+# MV 루트: 데이터/가중치 없이 합성 Recorder·지표·그래프·보고 검증
+uv run --locked python scripts/experiments/smoke_test_reporting.py
+# 저장된 Run의 Loss/ROC/PR/시점·latency 그래프와 새 Markdown 버전
+uv run --locked python scripts/experiments/generate_report.py --run-dir outputs/experiments/실제run_id
+# 기본은 REAL·COMPLETED이며 동일 데이터/평가 계약끼리 비교
+uv run --locked python scripts/experiments/compare_models.py --runs-root outputs/experiments/
+```
+
+Run은 `outputs/experiments/<run_id>/`에 설정·환경·Loss CSV·예측·지표·Benchmark·그림·report.md를 남깁니다. 미측정은 N/A, 합성은 SYNTHETIC/PARTIAL로 표시합니다. Loss가 없는 모델에는 가짜 Loss를 만들지 않습니다. Pixel AUROC/AP/AUPRO의 고정 히스토그램 근사와 누락 주석 제외를 보고합니다. 다른 GPU의 속도나 서로 다른 Manifest 결과를 하나의 순위로 합치지 않습니다. 모델별 Train 명령은 담당자가 실제로 연결·검증하기 전까지 제공하지 않습니다. 공유는 기존 Fork → 기능 Branch → PR 절차를 따릅니다.
+
+GitHub에는 [이상탐지 합성 예제](reports/experiments/release_examples/SYNTHETIC_ANOMALY.md)와 [객체탐지 합성 예제](reports/experiments/release_examples/SYNTHETIC_DETECTION.md), 대표 그래프 6개만 배포합니다. 전체 합성 Run·예측 배열·중간 결과는 위 Smoke 명령으로 로컬에서 생성합니다. 배포 범위와 검증 기록은 [공통 실험 배포 검증](reports/experiments/RELEASE_VALIDATION.md)을 참고하세요.
 
 ## 팀원 시작하기 — GitHub Fork 사용자
 
@@ -165,4 +190,4 @@ python3 scripts/inventory_dataset.py --data-root "$REALIAD_DATA_ROOT"
 배경·제품·결함 국소 밝기 확장: [실행 가이드](docs/BACKGROUND_BRIGHTNESS.md), [근거 보고서](reports/BACKGROUND_AWARE_BRIGHTNESS_ANALYSIS.md). 전체 실행 상태는 보고서 상단을 확인한다.
 
 
-해상도 전수 결과의 재집계: [회의용 최종 PDF](reports/RESOLUTION_TEAM_MEETING_FINAL.pdf), [상세 Markdown](reports/RESOLUTION_DETAILED_ANALYSIS.md), [파일 목록·한계·회의 결정 사항](reports/RESOLUTION_DELIVERY_GUIDE.md). 기존 151,050장 결과를 재사용했으며 전체 해상도 계산을 반복하지 않았다. 그래프·집계 CSV는 Git에서 제외된 outputs/resolution_detail_20261111_v2/에 있다. PDF는 그림을 내장한다.
+해상도 전수 결과의 재집계: [상세 Markdown](reports/RESOLUTION_DETAILED_ANALYSIS.md), [파일 목록·한계·회의 결정 사항](reports/RESOLUTION_DELIVERY_GUIDE.md). 회의용 최종 PDF `reports/RESOLUTION_TEAM_MEETING_FINAL.pdf`는 Git 배포 대상이 아니므로 관리자에게 별도로 수령한다. 기존 151,050장 결과를 재사용했으며 전체 해상도 계산을 반복하지 않았다. 그래프·집계 CSV는 Git에서 제외된 outputs/resolution_detail_20261111_v2/에 있다.

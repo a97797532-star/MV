@@ -47,3 +47,12 @@ uv run --locked pytest -q
 ## 리뷰 요청 사항
 
 특히 검토할 파일·인터페이스·재현 결과와 관련 이슈.
+
+## 공통 실험·보고 계약(모델 결과 PR)
+
+- [ ] SYNTHETIC/REAL·Run 상태·실제 학습 여부를 구분했음
+- [ ] Manifest/주석/평가ID/protocol 해시와 Validation Threshold 출처를 기록했음
+- [ ] Test로 Threshold·대표 Run을 선택하지 않았음
+- [ ] 다른 GPU·batch·입력집합의 속도를 한 순위로 합치지 않았음
+- [ ] 추론/연결 코드·설정·Markdown/공유 가능 그래프만 제출하고 weights/checkpoint/memory bank/index는 별도 전달함
+- [ ] 가중치 파일명·크기·SHA와 수령 방법만 남기고 비밀 URL/토큰을 제외했음

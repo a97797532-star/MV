@@ -25,7 +25,7 @@ Clone한 **MV 루트**에서 [Fork 일상 절차](GITHUB_FORK_WORKFLOW.md)로 �
 git switch -c feature/anomaly-patchcore
 ```
 
-새 브랜치로 이동했다는 메시지가 성공이다. 이미 있으면 새로 생성하지 말고 기존 브랜치를 확인한다. 현재 `models/`나 `mv_analysis/experiments/` 학습 엔트리포인트는 없으므로 `uv run models/.../train.py` 같은 명령은 아직 실행할 수 없다. 첫 통합 PR에서 관리자와 경로를 합의한다. 구조 표준화 PR이 먼저 Merge되면 그 경로를 따른다. 예를 들어 `experiments/patchcore/`를 제안할 수 있지만 **현재 존재하는 폴더로 간주하지 않는다**.
+새 브랜치로 이동했다는 메시지가 성공이다. 이미 있으면 새로 생성하지 말고 기존 브랜치를 확인한다. 현재 `models/`에는 계약·미구현 TODO가 있고 `mv_analysis/experiments/`에는 공통 기록·평가·보고 코드가 있다. 실제 모델 학습 엔트리포인트는 없으므로 `uv run models/.../train.py` 같은 명령은 아직 실행할 수 없다. 첫 통합 PR에서 관리자와 경로를 합의한다. 구조 표준화 PR이 먼저 Merge되면 그 경로를 따른다. 예를 들어 `experiments/patchcore/`를 제안할 수 있지만 **현재 존재하는 폴더로 간주하지 않는다**.
 
 ## 2. 공식 저장소를 MV 밖에 Clone하고 커밋 고정
 
@@ -150,3 +150,7 @@ export PYTHONPATH="$MV_PROJECT_ROOT${PYTHONPATH:+:$PYTHONPATH}"
 ## 7. 공유 및 관리자 확인
 
 코드/소형설정/테스트/README를 개인 Fork 브랜치에 Stage→Commit→Push하고 PR로 요청한다. 모델별 새 엔트리포인트가 생기면 이 문서와 [진행 상태](PROJECT_STATUS.md)에 실제 경로와 검증된 명령을 추가한다. 관리자 승인 전 공통 로더 계약, Canonical Manifest, uv.lock을 임의로 바꾸지 않는다. 모델학습/성능검증이 끝나기 전 최적 해상도나 전처리 성능 향상을 확정하지 않는다.
+
+## 공통 실험 인프라와 결과 제출
+
+[실험 규약](../experiments/EXPERIMENT_PROTOCOL.md), [12모델 작업 영역](../../models/README.md), [분담·완료 기준](MODEL_EXPERIMENT_ASSIGNMENT_GUIDE.md)을 따른다. GitHub 결과 제출은 추론/연결 코드·설정·Markdown 보고서와 공유 가능한 그래프이며, weights/checkpoint/memory bank/index는 별도 전달한다. 파일명·크기·SHA와 수령 방법을 남기고 비밀 URL/토큰은 제외한다.
