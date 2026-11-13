@@ -1,3 +1,5 @@
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Run annotated-NG spatial stages after real mask integrity evidence is available."""
 import argparse
 import json
@@ -9,7 +11,10 @@ from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('--metadata-run',required=True,type=Path);p.add_argument('--image-run',required=True,type=Path);p.add_argument('--integrity',required=True,type=Path);p.add_argument('--study',required=True,type=Path);p.add_argument('--output',required=True,type=Path);p.add_argument('--inventory',required=True,type=Path);args=p.parse_args()
 state=dict(started=datetime.now(timezone.utc).isoformat(),state='waiting_mask_integrity',commands=[])
 status_file=args.image_run/'spatial_analysis_driver.json'
+# save: 결과를 지정한 출력 위치에 기록합니다.
 def save():state['updated']=datetime.now(timezone.utc).isoformat();status_file.write_text(json.dumps(state,indent=2))
+# command: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: name, argv.
 def command(name,argv):
  state['state']=name;save();print(name,flush=True);t=time.time()
  with (args.image_run/f'spatial_{name}_stdout.log').open('a') as stream:result=subprocess.run(argv,stdout=stream,stderr=subprocess.STDOUT)

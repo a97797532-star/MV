@@ -1,3 +1,5 @@
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Bounded full-resolution analysis worker. Reuses core metrics and append-only success rows."""
 import argparse
 import fcntl
@@ -39,6 +41,8 @@ if cache.exists():
     if stream.read(1):raise
     stream.seek(offset);stream.truncate();break
 
+# calculate: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: row.
 def calculate(row):
  path=root/row['image_path'];st=path.stat()
  if st.st_size!=row['bytes'] or st.st_mtime_ns!=row['mtime_ns']:raise ValueError('Input snapshot changed')
@@ -58,6 +62,8 @@ if (not equivalence.exists() or not stamp.exists()) and samples:
  save_json(equivalence if not equivalence.exists() else out/'resolution_math_binding_validation.json',dict(checked_images=checks,tolerance=1e-10,metrics='same mv_analysis.core information_loss/prepare_image_reference; only bbox/CLI source changed',source_sha256=hashlib.sha256(b''.join(p.read_bytes() for p in sorted(Path('mv_analysis').glob('*.py')))).hexdigest()))
 if not stamp.exists():save_json(stamp,math_fingerprint)
 pending=[r for r in rows if r['image_path'] not in done][:args.batch_size];errors=[];start=time.time();source=hashlib.sha256(b''.join(p.read_bytes() for p in sorted(Path('mv_analysis').glob('*.py')))).hexdigest()
+# process: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: row.
 def process(row):
  try:return calculate(row),None
  except Exception as exc:return None,dict(image_path=row['image_path'],error=str(exc))

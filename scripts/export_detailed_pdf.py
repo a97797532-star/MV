@@ -1,3 +1,5 @@
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Create a detailed Korean PDF using installed Matplotlib and local fonts only."""
 import argparse,json,os,re,sys,unicodedata,zlib,hashlib
 from pathlib import Path
@@ -28,10 +30,14 @@ if font is None:raise SystemExit('Install a Korean font or provide NanumGothic/M
 fontprops=FontProperties(fname=str(font));charmap=FT2Font(str(font)).get_charmap();assert all(ord(c) in charmap for c in '제품밝기배경결함해상도분석보고서')
 plt.rcParams.update({'pdf.fonttype':42,'axes.unicode_minus':False,'pdf.compression':6})
 pages=[];included_figure_hashes=set()
+# clean: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: text.
 def clean(text):
  text=re.sub(r'!\[([^]]*)\]\(([^)]+)\)',r'그림 참조: \1 (\2)',text)
  text=re.sub(r'\[([^]]+)\]\(([^)]+)\)',r'\1 (\2)',text)
  return text.replace('**','').replace('`','')
+# wrap: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: text, width.
 def wrap(text,width=98):
  result=[]
  for paragraph in str(text).replace('−','-').split('\n'):
@@ -43,11 +49,15 @@ def wrap(text,width=98):
   result.append(line)
  return result
 
+# text_pages: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: title, body, source.
 def text_pages(title,body,source=''):
  lines=[]
  for paragraph in body:lines.extend(wrap(clean(paragraph)));lines.append('')
  for start in range(0,max(1,len(lines)),42):pages.append(dict(kind='text',title=title+(' (계속)' if start else ''),lines=lines[start:start+42],source=source))
 
+# table_pages: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: title, rows, source.
 def table_pages(title,rows,source):
  if len(rows)<2:return
  columns=rows[0];values=rows[1:];n=len(columns)
@@ -56,9 +66,12 @@ def table_pages(title,rows,source):
  for gi,indices in enumerate(groups):
   for start in range(0,len(values),22):pages.append(dict(kind='table',title=title+(f' / 열 {gi+1}/{len(groups)}' if len(groups)>1 else ''),columns=[columns[i] for i in indices],rows=[[row[i] if i<len(row) else '' for i in indices] for row in values[start:start+22]],source=source))
 
+# markdown: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: path, label.
 def markdown(path,label):
  if not path.exists():return
  title=label;body=[];table=[]
+ # flush: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
  def flush():
   nonlocal body,table
   if body:text_pages(title,body,str(path));body=[]
@@ -112,6 +125,8 @@ if not a.draft:
  table_pages('회의용 해상도 비교 · 전체 JPG 평균',[list(rm.columns)]+[[str(v) for v in row] for row in rm.itertuples(index=False,name=None)],str(a.image_run/'per_view_information_loss.csv'))
 for path,label in [(Path('reports/REAL_IAD_FINAL_ANALYSIS.md'),'통합 분석'),(Path('reports/BACKGROUND_AWARE_BRIGHTNESS_ANALYSIS.md'),'배경·제품 밝기'),(Path('reports/ANALYSIS_CROSS_RELATIONS.md'),'분석 간 관계'),(Path('reports/MASK_THRESHOLD_VALIDATION.md'),'마스크 정책'),(Path('reports/WINDOWS_RESULT_COMPARISON.md'),'Windows 재현 검증')]:markdown(path,label)
 
+# figure: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: path, title, caption, source.
 def figure(path,title,caption,source=None):
  if Path(path).is_file():
   digest=hashlib.sha256(Path(path).read_bytes()).hexdigest()

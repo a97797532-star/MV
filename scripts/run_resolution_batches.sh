@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 한글 안내: 환경 또는 배치 실행 진입점입니다. 프로젝트 위치·고정 의존성·출력 경로를 확인하세요.
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 mv_run_dir="${1:?Usage: bash scripts/run_resolution_batches.sh outputs/RUN [batch_size]}"

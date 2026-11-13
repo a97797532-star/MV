@@ -1,3 +1,5 @@
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Refresh evidence-based project reports without changing analysis artifacts."""
 import argparse
 import csv
@@ -22,15 +24,23 @@ if rebind.exists() and json.loads(rebind.read_text()).get('all_numeric_metrics_e
 reviewed_policy=json.loads((spatial/'mask_policy.json').read_text()) if (spatial/'mask_policy.json').exists() else {}
 policy_approved=reviewed_policy.get('validated',False)
 inventory=json.loads((a.inventory/'inventory.json').read_text());root=Path.cwd();reports=root/'reports';reports.mkdir(exist_ok=True)
+# link: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: path.
 def link(path):return str(Path('..')/path)
+# lines: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: path.
 def lines(path):
  if not path.exists():return 0
  with path.open() as stream:return sum(1 for _ in stream)
+# table: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: df.
 def table(df):
  if df is None or df.empty:return '미생성/해당 없음'
  columns=list(df.columns);rows=['| '+' | '.join(str(c) for c in columns)+' |','| '+' | '.join('---' for _ in columns)+' |']
  for row in df.itertuples(index=False,name=None):rows.append('| '+' | '.join(f'{v:.5f}' if isinstance(v,float) else str(v) for v in row)+' |')
  return '\n'.join(rows)
+# read: 입력 파일 또는 기록을 읽습니다.
+# 입력 인수: name.
 def read(name):
  path=run/name
  return pd.read_csv(path) if path.exists() else None

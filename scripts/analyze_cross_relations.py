@@ -1,3 +1,5 @@
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Descriptive associations across completed analyses; no causal/model performance claims."""
 import argparse,json,os,sys
 from pathlib import Path
@@ -30,6 +32,8 @@ for size,group in risk.groupby('target'):
 axes[1].set(title='Bboxes with projected short side <2px',xlabel='Category (alphabetical)',ylabel='Fraction of boxes');axes[1].legend()
 for size,group in paired.groupby('target'):axes[2].scatter(group.rgb_rmse,group.roi_rgb_rmse,s=10,alpha=.35,label=str(size))
 limit=max(paired.rgb_rmse.max(),paired.roi_rgb_rmse.max());axes[2].plot([0,limit],[0,limit],color='gray',linestyle='--');axes[2].set(title='336-mask ROI study: image vs defect ROI',xlabel='Whole JPG RGB RMSE',ylabel='Defect ROI RGB RMSE');axes[2].legend();fig.tight_layout();fig.savefig(a.output/'cross_analysis_associations.png',dpi=130);plt.close(fig)
+# table: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: df.
 def table(df):
  cols=list(df.columns);lines=['| '+' | '.join(cols)+' |','| '+' | '.join('---' for _ in cols)+' |']
  for row in df.itertuples(index=False,name=None):lines.append('| '+' | '.join(f'{v:.5f}' if isinstance(v,float) else str(v) for v in row)+' |')

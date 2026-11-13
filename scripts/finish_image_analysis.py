@@ -1,3 +1,5 @@
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Continue authorized full image analysis after brightness, retaining logs/checkpoints."""
 import argparse
 import json
@@ -8,8 +10,11 @@ from datetime import datetime,timezone
 from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('--run',required=True,type=Path);p.add_argument('--inventory',required=True,type=Path);p.add_argument('--mask-study',required=True,type=Path);args=p.parse_args();out=args.run
 status=dict(started=datetime.now(timezone.utc).isoformat(),state='waiting_for_full_brightness',commands=[])
+# persist: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
 def persist():
  status['updated']=datetime.now(timezone.utc).isoformat();(out/'image_analysis_driver.json').write_text(json.dumps(status,indent=2))
+# execute: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: name, argv.
 def execute(name,argv):
  status['state']=name;persist();print(name,flush=True);start=time.time()
  with (out/f'{name}_stdout.log').open('a') as log:

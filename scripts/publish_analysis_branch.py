@@ -1,3 +1,6 @@
+# 주의: 과거 배포 전용 도구로 git commit/push를 실행할 수 있습니다. 팀 기본 검증 명령이 아니며 명시적 배포 승인 없이 실행하지 마세요.
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Prepare an exact upload plan, then commit/push the verified analysis branch without rewriting main."""
 import argparse,hashlib,json,os,re,subprocess,sys
 from pathlib import Path
@@ -5,20 +8,27 @@ from datetime import datetime,timezone
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,default=ROOT/'outputs/git_publication_plan.json');p.add_argument('--prepare',action='store_true');p.add_argument('--execute',action='store_true');p.add_argument('--resume',action='store_true');a=p.parse_args();os.chdir(ROOT)
 BRANCH='analysis/real-iad-full-20261111';REPO='whrjsdnr/MV';RESULT=ROOT/'outputs/git_delivery_result.json'
+# sanitize: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: text.
 def sanitize(text):
  text=re.sub(r'(https?://)[^/@\s]+:[^/@\s]+@',r'\1<redacted>@',text)
  return re.sub(r'(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-(?:proj-)?[A-Za-z0-9_-]{20,})','<redacted>',text)
+# run: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: args, check.
 def run(args,check=True):
  env=os.environ.copy();env['GIT_TERMINAL_PROMPT']='0';env['GH_PROMPT_DISABLED']='1';r=subprocess.run(args,capture_output=True,text=True,env=env)
  if r.returncode and check:raise RuntimeError(sanitize(r.stderr or r.stdout))
  return r
 
+# sha: 파일 바이트의 SHA-256을 계산해 입력 동일성 확인에 사용합니다.
+# 입력 인수: path.
 def sha(path):
  h=hashlib.sha256()
  with Path(path).open('rb') as stream:
   while chunk:=stream.read(1024*1024):h.update(chunk)
  return h.hexdigest()
 
+# assert_ready: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
 def assert_ready():
  for name in ['outputs/full_20261111_v6/resolution_scientific_validation.json','outputs/background_full_20261111_v1/scientific_validation.json','reports/SOURCE_PRESERVATION_VALIDATION.json','reports/REAL_IAD_DETAILED_ANALYSIS.render_validation.json']:
   if not json.loads(Path(name).read_text()).get('success'):raise RuntimeError('Validation not passed: '+name)

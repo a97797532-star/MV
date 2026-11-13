@@ -1,3 +1,5 @@
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Summarize frozen resolution CSVs; decode only selected illustrations, never rerun metrics.
 
 All figures/tables stay in the ignored output directory. Only source and reports
@@ -26,6 +28,8 @@ UNITS = ['dB', 'ratio [-1,1]', 'ratio [0,1]', 'ratio [0,1]',
          'restored/native ratio', 'Laplacian energy ratio', 'intensity [0,255]']
 
 
+# digest: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: path.
 def digest(path):
     h = hashlib.sha256()
     with path.open('rb') as stream:
@@ -34,6 +38,7 @@ def digest(path):
     return h.hexdigest()
 
 
+# main: 명령행 인수를 읽고 본 파일의 처리 흐름을 실행합니다.
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run', type=Path, default=Path('outputs/windows_preserved_20261111_v1'))
@@ -99,6 +104,8 @@ def main():
     chosen = pd.DataFrame(selections)
     chosen.to_csv(a.output/'extreme_review_images.csv',index=False)
     figures = []
+    # save: 결과를 지정한 출력 위치에 기록합니다.
+    # 입력 인수: fig, name, caption.
     def save(fig, name, caption):
         path = a.output/(name+'.png')
         fig.savefig(path,dpi=145,bbox_inches='tight');plt.close(fig)
@@ -201,6 +208,8 @@ def main():
     print(f'Aggregation and {len(figures)} figures complete; decoded only {len(decoded)} selected JPGs',flush=True)
     # Self-contained interpretation with links to exact CSVs and all visual evidence.
     overall=tables['overall'];means=overall.pivot(index='target',columns='metric',values='mean')
+    # mdtable: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: frame.
     def mdtable(frame):
         cols=list(frame.columns);lines=['| '+' | '.join(map(str,cols))+' |','| '+' | '.join(['---']*len(cols))+' |']
         for row in frame.itertuples(index=False,name=None):
@@ -261,6 +270,8 @@ def main():
     font=FontProperties(fname='/usr/share/fonts/truetype/nanum/NanumGothic.ttf')
     plt.rcParams.update({'pdf.fonttype':42,'axes.unicode_minus':False})
     pages=[]
+    # wrap: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: text, width.
     def wrap(text,width=94):
         import unicodedata
         lines=[];line='';count=0
@@ -273,6 +284,7 @@ def main():
         lines.append(line);return lines
     with PdfPages(pdf) as book:
         buffer=[];title='Real-IAD 해상도 상세 분석'
+        # textflush: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
         def textflush():
             nonlocal buffer
             for start in range(0,len(buffer),42):

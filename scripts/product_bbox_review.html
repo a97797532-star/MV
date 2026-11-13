@@ -1,0 +1,16 @@
+<!-- 한글 안내: 사람 검수용 화면입니다. 원본 로딩과 좌표 점검을 확인한 뒤에만 승인하며, 실제 승인 기록은 서버에서 검증합니다. -->
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Real-IAD 제품 전체 BBox 검수</title>
+<style>
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:#f3f4f6;color:#20252c;font:15px/1.6 system-ui,sans-serif}header{padding:18px 26px;background:white;border-bottom:1px solid #ddd}h1{font-size:21px;margin:0}main{display:grid;grid-template-columns:minmax(320px,1fr) 350px;gap:20px;max-width:1500px;margin:20px auto;padding:0 20px}.panel{background:white;border:1px solid #ddd;border-radius:10px;padding:18px}canvas{display:block;width:100%;height:auto;max-width:1024px;background:#eee;touch-action:none;outline:1px solid #ccc}button,input{font:inherit}button{padding:9px 12px;margin:4px 0;border:1px solid #bbb;border-radius:6px;background:#fafafa;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.actions{display:flex;gap:8px;flex-wrap:wrap}input[type=text]{width:100%;padding:9px;border:1px solid #bbb;border-radius:6px}label{display:block;margin:12px 0}#info{white-space:pre-wrap;overflow-wrap:anywhere}#message,#error{white-space:pre-wrap;overflow-wrap:anywhere}#message{color:#176239}#error{color:#a22525}#coordinates{font:14px/1.6 monospace;padding:10px;background:#f5f6f7}progress{width:100%}.hint{font-size:13px;color:#58616c}.badge{font-weight:600;padding:3px 8px;background:#edf0f4;border-radius:5px}#loading{min-height:25px}aside h2{font-size:17px;margin:8px 0}@media(max-width:850px){main{grid-template-columns:1fr}canvas{max-height:none}}
+</style><script src="/review.js" defer></script></head>
+<body><header><h1>Real-IAD 제품 전체 BBox 사람 검수</h1><div class="hint">제품 전체와 돌출 부품을 감싸세요. 자동 제안은 정답이 아니며, 명시적으로 승인한 기록만 VERIFIED_GT가 됩니다.</div></header>
+<main><section class="panel"><div id="loading" role="status">검수 항목을 불러오는 중…</div><canvas id="c" width="1024" height="1024" aria-label="제품 이미지와 수정 가능한 BBox"></canvas><p class="hint">파란 점선: 자동 제안 · 녹색 실선: 현재 검수 BBox · 마우스로 드래그하여 전체 박스를 다시 지정합니다.</p><div id="coordinates">BBox: —</div></section>
+<aside class="panel"><h2 id="counter">— / —</h2><div id="reviewState" class="badge">로딩 중</div><div id="info"></div><progress id="progress" max="600" value="0"></progress><div id="progressText">검수 진행률 확인 중</div>
+<div class="actions"><button id="previous" disabled>이전</button><button id="next" disabled>다음</button><button id="retry">다시 불러오기</button></div><button id="restore" disabled>자동 제안 BBox 복원</button>
+<label>검수자 이름 / ID (2자 이상)<input id="who" type="text" autocomplete="name" placeholder="검수자 이름 또는 ID"></label>
+<label><input id="ack" type="checkbox"> 이미지와 제품 전체 BBox를 직접 확인했습니다</label>
+<label id="reReviewLabel" hidden><input id="reReview" type="checkbox"> 기존 승인을 재검수합니다. 이전 기록을 보존하고 새 이력을 추가합니다.</label>
+<button id="approve" disabled>승인 · 저장</button><div class="actions"><button id="pending" disabled>검수 보류</button><button id="reject" disabled>제안 거부</button></div>
+<div id="message" role="status"></div><div id="error" role="alert"></div><p class="hint">동일 검수자·좌표·메모의 중복 저장은 기록을 추가하지 않습니다. 다른 창에서 바뀐 항목은 새로 불러와야 합니다. 저장 후 결과를 확인하고 ‘다음’으로 이동하세요.</p></aside></main></body></html>

@@ -1,3 +1,5 @@
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Make report figures/aggregate links work on GitHub; retain large local-only evidence paths."""
 import argparse,hashlib,json,re,shutil
 from pathlib import Path
@@ -8,6 +10,8 @@ for item in manifest['artifacts']:
  for alias in item.get('source_aliases',[]):mapping[Path(alias).resolve()]=existing
  if item.get('source'):
   source=Path(item['source']).resolve();mapping[source]=Path(item['path']).resolve()
+# share: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: source.
 def share(source):
  source=source.resolve()
  if source in mapping:return mapping[source]
@@ -30,6 +34,8 @@ def share(source):
 rewrites=[];local_only=[]
 for report in sorted(a.reports.glob('*.md')):
  text=report.read_text()
+ # replace: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+ # 입력 인수: match.
  def replace(match):
   image,label,target=match.group(1),match.group(2),match.group(3)
   if not target.startswith('../outputs/'):return match.group(0)

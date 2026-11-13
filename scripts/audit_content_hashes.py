@@ -1,3 +1,5 @@
+# 한글 안내: 파일명에 해당하는 분석·검증·보고 작업의 실행 스크립트입니다. 인수와 출력 위치를 확인한 뒤 실행합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Read-only exact-byte duplicate and input fingerprint audit with resumable hashes."""
 import argparse
 import hashlib
@@ -17,6 +19,8 @@ if cache.exists():
  for line in cache.open():
   try:r=json.loads(line);done[r['path']]=r
   except json.JSONDecodeError:raise SystemExit('Interrupted hash tail requires review before reuse')
+# compute: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: item.
 def compute(item):
  try:
   path=root/item['path'];before=path.stat();digest=hashlib.sha256()
