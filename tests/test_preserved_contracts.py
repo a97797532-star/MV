@@ -1,3 +1,5 @@
+# 한글 안내: 합성·임시 자료로 해당 기능의 계약과 오류 처리를 검사하는 테스트입니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 import json
 import cv2
 import numpy as np
@@ -6,6 +8,8 @@ from mv_analysis.splits import apply_preserved_split,reproduce_windows_project_s
 from mv_analysis.presence_heatmaps import generate
 
 
+# test_preserved_split_normalization_and_product_grouping: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: tmp_path.
 def test_preserved_split_normalization_and_product_grouping(tmp_path):
     rows=[]
     for i in range(8):
@@ -19,6 +23,8 @@ def test_preserved_split_normalization_and_product_grouping(tmp_path):
     assert imported.split.tolist()==restored.split.tolist() and evidence['matched']==40
 
 
+# test_presence_preserves_single_pixel_and_separates_denominators: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: tmp_path.
 def test_presence_preserves_single_pixel_and_separates_denominators(tmp_path):
     root=tmp_path/'data';root.mkdir();out=tmp_path/'out';out.mkdir()
     one=np.zeros((128,128),np.uint8);one[1,1]=255

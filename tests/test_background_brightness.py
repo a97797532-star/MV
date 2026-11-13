@@ -1,8 +1,11 @@
+# 한글 안내: 합성·임시 자료로 해당 기능의 계약과 오류 처리를 검사하는 테스트입니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 import numpy as np
 import pytest
 from mv_analysis.background_brightness import analyze,segment,region_stats
 
 
+# test_uniform_is_not_certified_as_product: 정상·오류 상황을 검증하는 회귀 테스트입니다.
 def test_uniform_is_not_certified_as_product():
     image=np.full((128,128,3),240,np.uint8);row,masks=analyze(image,{})
     assert row['segmentation_status']=='failed'
@@ -10,6 +13,7 @@ def test_uniform_is_not_certified_as_product():
     assert row['defect_status']=='not_provided'
 
 
+# test_adaptive_background_not_fixed_white_black_threshold: 정상·오류 상황을 검증하는 회귀 테스트입니다.
 def test_adaptive_background_not_fixed_white_black_threshold():
     for background,product,bgtype in [(240,50,'WHITE'),(15,190,'BLACK')]:
         im=np.full((256,256,3),background,np.uint8);im[70:185,65:190]=product;im[110:140,110:140]=background
@@ -19,6 +23,7 @@ def test_adaptive_background_not_fixed_white_black_threshold():
         assert q['method_A_C_agreement']>.8
 
 
+# test_uncertainty_invalidates_product_local_context: 정상·오류 상황을 검증하는 회귀 테스트입니다.
 def test_uncertainty_invalidates_product_local_context():
     image=np.zeros((64,64,3),np.uint8);defect=np.zeros((64,64),np.uint8);defect[20:25,20:25]=1
     row,_=analyze(image,{},defect)
@@ -26,6 +31,7 @@ def test_uncertainty_invalidates_product_local_context():
     assert row['defect_local_difference'] is None and row['product_mean'] is None
 
 
+# test_histogram_percentile_exact_and_color_order: 정상·오류 상황을 검증하는 회귀 테스트입니다.
 def test_histogram_percentile_exact_and_color_order():
     gray=np.arange(256,dtype=np.uint8).reshape(16,16);r=region_stats(gray,np.ones(gray.shape,bool),'x_')
     assert r['x_p05']==pytest.approx(np.percentile(gray,5))
@@ -33,6 +39,7 @@ def test_histogram_percentile_exact_and_color_order():
     assert row['whole_mean']==76
 
 
+# test_defect_mask_never_controls_product_and_local_annulus_stays_inside: 정상·오류 상황을 검증하는 회귀 테스트입니다.
 def test_defect_mask_never_controls_product_and_local_annulus_stays_inside():
     image=np.full((256,256,3),240,np.uint8);image[50:205,50:205]=40;image[100:110,100:110]=70
     defect=np.zeros((256,256),np.uint8);defect[100:110,100:110]=1
@@ -43,6 +50,8 @@ def test_defect_mask_never_controls_product_and_local_annulus_stays_inside():
     assert row['defect_local_mean']==40
 
 
+# test_regional_checkpoints_resume_and_keep_unprovided_ng: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: tmp_path.
 def test_regional_checkpoints_resume_and_keep_unprovided_ng(tmp_path):
     import json
     import cv2

@@ -1,3 +1,5 @@
+# 한글 안내: 합성·임시 자료로 해당 기능의 계약과 오류 처리를 검사하는 테스트입니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 import json
 from pathlib import Path
 import cv2
@@ -8,6 +10,8 @@ from mv_analysis.core import parse_image,metadata,audit_masks,binary_mask,compon
 from mv_analysis.cli import main
 
 
+# dataset: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: tmp_path.
 @pytest.fixture
 def dataset(tmp_path):
     root=tmp_path/'data';root.mkdir()
@@ -26,6 +30,8 @@ def dataset(tmp_path):
     return root
 
 
+# test_metadata_split_and_pairs: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: dataset, tmp_path.
 def test_metadata_split_and_pairs(dataset,tmp_path):
     out=tmp_path/'result';out.mkdir();df,r=metadata(dataset,out)
     assert len(df)==40 and r['png_count']==20 and r['ng_without_mask']==0
@@ -34,6 +40,7 @@ def test_metadata_split_and_pairs(dataset,tmp_path):
     assert len(pd.read_csv(out/'image_mask_pairs.csv'))==20
 
 
+# test_mask_and_components: 정상·오류 상황을 검증하는 회귀 테스트입니다.
 def test_mask_and_components():
     mask=np.zeros((8,8),np.uint8);mask[1,1]=255;mask[2,2]=255
     policy={'validated':True,'threshold':0}
@@ -43,6 +50,7 @@ def test_mask_and_components():
     with pytest.raises(ValueError):binary_mask(mask,policy)
 
 
+# test_color_and_resolution: 정상·오류 상황을 검증하는 회귀 테스트입니다.
 def test_color_and_resolution():
     bgr=np.zeros((32,32,3),np.uint8);bgr[:,:,2]=255
     assert brightness_metrics(bgr)['brightness']==76
@@ -52,6 +60,8 @@ def test_color_and_resolution():
     assert information_loss(image,16)['ssim']<.1
 
 
+# test_full_synthetic_and_exports: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: dataset, tmp_path.
 def test_full_synthetic_and_exports(dataset,tmp_path):
     out=tmp_path/'output'
     assert main(['--data-root',str(dataset),'--output',str(out),'run-all','--limit','40'])==0
@@ -69,12 +79,16 @@ def test_full_synthetic_and_exports(dataset,tmp_path):
     with pytest.raises(SystemExit):main(['--data-root',str(dataset),'--output',str(out),'metadata'])
 
 
+# test_unverified_mask_stops: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: dataset, tmp_path.
 def test_unverified_mask_stops(dataset,tmp_path):
     mask_path=next(dataset.rglob('*.png'));m=cv2.imread(str(mask_path),0);m[0,0]=128;cv2.imwrite(str(mask_path),m)
     out=tmp_path/'bad';out.mkdir();df,_=metadata(dataset,out);p=audit_masks(dataset,df,out)
     assert not p['validated'] and p['threshold'] is None
 
 
+# test_unannotated_ng_is_included_without_fabrication: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: dataset, tmp_path.
 def test_unannotated_ng_is_included_without_fabrication(dataset,tmp_path):
     mask=next(dataset.rglob('*.png'));mask.unlink() # synthetic fixture only
     out=tmp_path/'without_mask';out.mkdir();df,r=metadata(dataset,out)
@@ -85,6 +99,8 @@ def test_unannotated_ng_is_included_without_fabrication(dataset,tmp_path):
     assert not mask.exists()
 
 
+# test_extra_filename_separator: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: tmp_path.
 def test_extra_filename_separator(tmp_path):
     root=tmp_path/'data';path=root/'audiojack'/'NG'/'BX'/'S0001'/'audiojack__0001_NG_BX_C1_20231023111538.jpg'
     row=parse_image(path,root)
@@ -92,6 +108,8 @@ def test_extra_filename_separator(tmp_path):
     assert row['filename_category_token']=='audiojack_'
 
 
+# test_conflicting_defect_preserves_image: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: tmp_path.
 def test_conflicting_defect_preserves_image(tmp_path):
     root=tmp_path/'data';path=root/'fire_hood'/'NG'/'HS'/'S0131'/'fire_hood_0131_NG_QS_C1_20230928162107.jpg'
     row=parse_image(path,root)
@@ -99,6 +117,8 @@ def test_conflicting_defect_preserves_image(tmp_path):
     assert row['directory_defect_type']=='HS' and row['filename_defect_type']=='QS'
 
 
+# test_bbox_does_not_create_negative_labels_for_unannotated_ng: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: dataset, tmp_path.
 def test_bbox_does_not_create_negative_labels_for_unannotated_ng(dataset,tmp_path):
     from mv_analysis.stages import bbox
     mask=next(dataset.rglob('*.png'));mask.unlink() # synthetic fixture only
@@ -111,6 +131,8 @@ def test_bbox_does_not_create_negative_labels_for_unannotated_ng(dataset,tmp_pat
     assert report['unannotated_ng_skipped']==1 and report['images']==39 and report['errors']==0
 
 
+# test_two_defect_classes_and_normalized_yolo: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: dataset, tmp_path.
 def test_two_defect_classes_and_normalized_yolo(dataset,tmp_path):
     from mv_analysis.stages import bbox
     folder=dataset/'widget'/'NG'/'pit'/'S0005';folder.mkdir(parents=True)
@@ -127,12 +149,14 @@ def test_two_defect_classes_and_normalized_yolo(dataset,tmp_path):
     coco=COCO(str(out/'defect_coco.json'));assert len(coco.getCatIds())==2 and len(coco.getImgIds())==41
 
 
+# test_histogram_percentiles_match_numpy: 정상·오류 상황을 검증하는 회귀 테스트입니다.
 def test_histogram_percentiles_match_numpy():
     rng=np.random.default_rng(4);image=rng.integers(0,256,(47,63,3),dtype=np.uint8)
     gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY);actual=brightness_metrics(image)
     for key,q in [('p05',5),('p50',50),('p95',95)]:assert actual[key]==pytest.approx(np.percentile(gray,q))
 
 
+# test_gray_mask_requires_reviewed_policy: 정상·오류 상황을 검증하는 회귀 테스트입니다.
 def test_gray_mask_requires_reviewed_policy():
     gray=np.array([[0,32,64],[127,192,255]],np.uint8)
     with pytest.raises(ValueError):binary_mask(gray,{'validated':False,'threshold':127,'encoding':'grayscale_uint8'})
@@ -140,6 +164,8 @@ def test_gray_mask_requires_reviewed_policy():
     assert binary_mask(gray,reviewed).sum()==2
 
 
+# test_provided_empty_ng_mask_keeps_ng_class: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: dataset, tmp_path.
 def test_provided_empty_ng_mask_keeps_ng_class(dataset,tmp_path):
     from mv_analysis.stages import bbox
     mask=next(dataset.rglob('*.png'));cv2.imwrite(str(mask),np.zeros((48,64),np.uint8))
@@ -150,6 +176,8 @@ def test_provided_empty_ng_mask_keeps_ng_class(dataset,tmp_path):
     report=json.loads((out/'bbox_validation_report.json').read_text());assert report['errors']==0 and report['provided_empty_ng_masks']==1
 
 
+# test_resume_allows_fresh_stage_but_rejects_changed_cached_producer: 정상·오류 상황을 검증하는 회귀 테스트입니다.
+# 입력 인수: dataset, tmp_path.
 def test_resume_allows_fresh_stage_but_rejects_changed_cached_producer(dataset,tmp_path):
     out=tmp_path/'producer_guard';assert main(['--data-root',str(dataset),'--output',str(out),'metadata','--limit','40'])==0
     manifest=out/'run.json';record=json.loads(manifest.read_text());record['config']['source_sha256']='historical_source';manifest.write_text(json.dumps(record))
