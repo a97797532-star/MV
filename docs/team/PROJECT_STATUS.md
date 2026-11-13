@@ -1,6 +1,6 @@
 # MV 현재 진행 상태와 다음 작업
 
-확인일: **2026-11-13 (KST)**. 새 팀원은 이 문서 → [Fork 협업](GITHUB_FORK_WORKFLOW.md) → [설치·로더 확인](ONBOARDING_CHECKLIST.md) → [모델 실험 시작 절차](MODEL_EXPERIMENT_WORKFLOW.md) 순서로 읽는다. 이 문서는 로컬 작업 공간에서 확인한 상태다. 아직 Commit/Push하지 않은 파일이 다수 있으므로 GitHub main 또는 개인 Fork에도 모두 반영됐다는 뜻은 아니다.
+확인일: **2026-11-13 (KST)**. 새 팀원은 이 문서 → [Fork 협업](GITHUB_FORK_WORKFLOW.md) → [설치·로더 확인](ONBOARDING_CHECKLIST.md) → [모델 실험 시작 절차](MODEL_EXPERIMENT_WORKFLOW.md) 순서로 읽는다. 이 문서는 로컬 작업 공간에서 확인한 상태다. 공통 소스·검증 코드·테스트는 이번 배포 Commit에 포함했다. 비공개 분석 결과까지 모두 GitHub에 포함되는 것은 아니며 원격 반영은 GitHub main의 Commit으로 확인한다.
 
 상태 용어: **VERIFIED**=명시한 범위 실제 확인, **UNVERIFIED**=구현/자료는 있으나 해당 검증 미완료, **NOT_IMPLEMENTED/NOT_RUN**=아직 구현/실행 안 함. 과거 보고서는 해당 시점의 증거로 보존하고 최신 사항은 아래를 따른다.
 
@@ -65,3 +65,11 @@ v1의 상세 전수 디코딩 결과는 [기존 최종 검증 보고서](../../r
 기존 전체 진행 보고서: [분석 종합](../../reports/DATA_ANALYSIS_MASTER_REPORT.md), [로더 구현](../../reports/DATA_LOADER_IMPLEMENTATION.md), [클래스 해결](../../reports/FILENAME_CLASS_RESOLUTION.md). 일부 보고서의 대형근거파일/내부PDF는 Git에서 제외돼 로컬 관리자 환경에만 존재할 수 있다.
 
 이번 README/협업 문서의 명령·링크·실제 로더 검증 범위는 [문서 검증 기록](DOCUMENTATION_VALIDATION.md)을 참고한다.
+
+## 공통 코드 배포 업데이트
+
+- 프로젝트 자체 소스133개에 한글 설명을 보강하고 신규/변경 코드를 목적별로 Commit했다.
+- 별도 로컬 Clone의 새 가상환경에서 고정 의존성170개 설치, dummy 검증, 합성 Smoke, 전체145개 테스트를 통과했다. 기존 캐시 기반이며 인터넷 cold install과 팀원 개별 설치는 미검증이다.
+- 새 명령: `uv run --locked python scripts/smoke_test_shared_data.py --synthetic`. 비공개 데이터가 없어도 실행할 수 있다.
+- 전체 Canonical CSV/승인 Ledger/이미지/가중치는 Git 배포 대상에서 제외했다. [배포 검증 기록](../../reports/CODE_RELEASE_PREPARATION.md)과 [수령 안내](CODE_RELEASE.md)를 따른다.
+- 사용자가 Push를 승인했다. 실제 원격 반영 여부는 GitHub main Commit을 확인한다.
