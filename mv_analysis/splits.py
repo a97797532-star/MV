@@ -1,9 +1,13 @@
+# 한글 안내: 기존 제품 그룹 기준 데이터 분할을 처리하며 시점 간 Split 누수를 방지합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Portable adapter for existing Windows project splits; no relabeling of NG/masks."""
 from pathlib import Path
 import pandas as pd
 from .legacy_bridge import core as preserved_core
 
 
+# apply_preserved_split: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: df, manifest, root.
 def apply_preserved_split(df,manifest,root):
     prior=pd.read_csv(manifest,keep_default_na=False)
     path_column='relative_path' if 'relative_path' in prior else 'image_path'
@@ -33,6 +37,8 @@ def apply_preserved_split(df,manifest,root):
     return result,dict(manifest_rows=len(prior),matched=int(result.image_path.isin(assignments).sum()),new_images=int((result.split_origin=='new_image_hash_split').sum()),conservative_serial_cross_split_groups=int((result.groupby('conservative_serial_id').split.nunique()>1).sum()),identity_note='Serial numbers reused across quality/defect groups; conservative alias crossings are not proof of physical identity')
 
 
+# reproduce_windows_project_split: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: df.
 def reproduce_windows_project_split(df):
     """Original executed notebook cell 28: folder key + two seed-42 train_test_split calls."""
     from sklearn.model_selection import train_test_split

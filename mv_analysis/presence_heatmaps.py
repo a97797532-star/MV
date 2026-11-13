@@ -1,3 +1,5 @@
+# 한글 안내: Real-IAD 분석 파이프라인의 공통 기능입니다. 입력 자료와 설정의 기존 계약을 유지합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Preserved per-image cell presence and known/positive conditional denominators."""
 import json
 import hashlib
@@ -10,6 +12,8 @@ from .core import binary_mask,read_image,save_json
 from .legacy_bridge import coursework
 
 
+# generate: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: root, out, df, policy, max_new_groups.
 def generate(root,out,df,policy,max_new_groups=0):
     train=df[(df.status=='NG')&(df.split=='train')]
     keys=[];counts=[];knowns=[];positives=[];areas=[];summaries=[];errors=[]

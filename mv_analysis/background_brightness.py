@@ -1,3 +1,5 @@
+# 한글 안내: 배경·제품 후보와 결함 주변을 구분해 밝기를 계산합니다. 자동 분할은 검증된 정답이 아닙니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Unsupervised regional brightness: candidate masks, explicit uncertainty, no ground truth claims."""
 from __future__ import annotations
 import cv2
@@ -7,10 +9,14 @@ VERSION='border-lab-v5'
 SEGMENT_SIZE=256
 
 
+# region_stats: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: gray, mask, prefix.
 def region_stats(gray,mask,prefix):
     values=gray[mask]
     if not values.size:return {prefix+k:None for k in ['mean','median','std','variance','p05','p50','p95','contrast','shadow_ratio','highlight_ratio']}
     hist=np.bincount(values,minlength=256);cdf=np.cumsum(hist)
+    # q: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: p.
     def q(p):
         position=(len(values)-1)*p;lo=int(position);hi=int(np.ceil(position))
         x=np.searchsorted(cdf,lo,side='right');y=np.searchsorted(cdf,hi,side='right')
@@ -19,17 +25,23 @@ def region_stats(gray,mask,prefix):
     return {prefix+'mean':mean,prefix+'median':q(.5),prefix+'std':std,prefix+'variance':std**2,prefix+'p05':q(.05),prefix+'p50':q(.5),prefix+'p95':q(.95),prefix+'contrast':q(.95)-q(.05),prefix+'shadow_ratio':float((values<=5).mean()),prefix+'highlight_ratio':float((values>=250).mean())}
 
 
+# agreement: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: a, b.
 def agreement(a,b):
     union=np.count_nonzero(a|b)
     return float(np.count_nonzero(a&b)/union) if union else 1.
 
 
+# boundary_connected: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: candidate, border.
 def boundary_connected(candidate,border):
     n,labels,stats,_=cv2.connectedComponentsWithStats(candidate.astype(np.uint8),8)
     ids=np.unique(labels[candidate&border]);ids=ids[ids>0]
     return np.isin(labels,ids)
 
 
+# segment: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: image, grabcut.
 def segment(image,grabcut=False):
     h,w=image.shape[:2];scale=SEGMENT_SIZE/max(h,w);small=cv2.resize(image,(max(16,round(w*scale)),max(16,round(h*scale))),interpolation=cv2.INTER_AREA)
     hh,ww=small.shape[:2];lab=cv2.cvtColor(small,cv2.COLOR_BGR2LAB).astype(np.float32);hsv=cv2.cvtColor(small,cv2.COLOR_BGR2HSV)
@@ -98,6 +110,8 @@ def segment(image,grabcut=False):
     return native,metrics
 
 
+# analyze: 입력 자료의 특성을 계산하고 분석합니다.
+# 입력 인수: image, row, defect, grabcut.
 def analyze(image,row,defect=None,grabcut=False):
     masks,quality=segment(image,grabcut);gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY);all_mask=np.ones(gray.shape,bool);result={**row,**quality,**region_stats(gray,all_mask,'whole_')};accepted=quality['segmentation_status']=='accepted_heuristic';fg=masks['A'];bg=~fg
     result.update(region_stats(gray,fg if accepted else np.zeros_like(fg),'product_'));result.update(region_stats(gray,bg if accepted else np.zeros_like(bg),'background_'));result['product_pixel_ratio']=float(fg.mean()) if accepted else None;result['background_pixel_ratio']=float(bg.mean()) if accepted else None

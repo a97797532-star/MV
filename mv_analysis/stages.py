@@ -1,3 +1,5 @@
+# 한글 안내: Real-IAD 분석 파이프라인의 공통 기능입니다. 입력 자료와 설정의 기존 계약을 유지합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 from __future__ import annotations
 import json
 import os
@@ -10,6 +12,8 @@ from .core import (read_image, binary_mask, components, brightness_metrics,
                    information_loss, prepare_image_reference, save_json, plot_bars)
 
 
+# cached_rows: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: out, name, rows, calculate.
 def cached_rows(out, name, rows, calculate):
     """Append-only checkpoints: each successful input is committed independently."""
     cache=out/f'{name}.jsonl'; done={};errors=[]
@@ -24,6 +28,8 @@ def cached_rows(out, name, rows, calculate):
                 except json.JSONDecodeError:
                     if stream.read(1):raise
                     stream.seek(offset);stream.truncate();break
+    # process: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: row.
     def process(row):
         try:return {**row,**calculate(row)},None
         except Exception as exc:return None,dict(image_path=row['image_path'],error=str(exc))
@@ -42,7 +48,11 @@ def cached_rows(out, name, rows, calculate):
     return result
 
 
+# brightness: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: root, out, df, policy.
 def brightness(root,out,df,policy=None):
+    # calc: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: row.
     def calc(row):
         im=read_image(root/row['image_path']);m=brightness_metrics(im)
         if row['mask_path'] and policy and policy.get('validated'):
@@ -77,6 +87,8 @@ def brightness(root,out,df,policy=None):
     (out/'brightness_analysis_report.md').write_text(f'# 밝기 분석\n\n처리 {len(b):,}장. OpenCV BGR→GRAY의 0–255 밝기이며 RGB 채널 평균과 다릅니다.\n\n비교 {len(c)}개: NG 불량유형과 같은 품목·시점의 OK를 비교합니다. Histogram overlap은 32 bin 확률질량의 교집합입니다. Cohen d는 pooled 표준편차를 사용합니다.\n\n증강 통계는 train만 사용합니다. 밝기 차이가 결함 자체인지 조명·재질·촬영 배치 차이인지 후보 원본을 검수해야 합니다. 차이를 모델 검출 난이도로 단정하지 않습니다.\n')
 
 
+# area_heatmap: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: root, out, df, policy.
 def area_heatmap(root,out,df,policy):
     positive={};known={};summary=[]
     train=df[(df.status=='NG')&(df.split=='train')&(df.mask_path!='')]
@@ -114,6 +126,8 @@ def area_heatmap(root,out,df,policy):
     (out/'heatmap_analysis_report.md').write_text(f'# 불량 위치\n\nTrain NG {len(train):,}장, {len(keys)}그룹. 64×64 area occupancy는 마스크 면적 분율입니다. positive는 면적 분율의 합, known은 해당 격자의 관측 마스크 수입니다.\n\n마스크는 이미지 전체를 주석한 것으로 가정합니다. 물체 가시성/주석 누락 여부는 별도 검증이 필요하며, 미관측 그룹은 배열에 없고 정상으로 간주하지 않습니다. 관측 마스크에서 결함이 없던 격자 역시 정상 보장의 근거가 아닙니다. 공간적으로 정렬되지 않은 다른 품목의 종합 그림은 기술 통계입니다. GAN 위치 정책에는 품목·불량·시점별 그림과 관측 수를 사용하고 희소 그룹의 범위를 강제하지 않습니다.\n')
 
 
+# bbox: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: root, out, df, policy, class_policy.
 def bbox(root,out,df,policy,class_policy='defect_type'):
     ng=df[(df.status=='NG')&(df.mask_path!='')&(~df.label_conflict)];class_key=lambda r:r['defect_type'] if class_policy=='defect_type' else r['category']+'__'+r['defect_type']
     names=sorted({class_key(r) for r in ng.to_dict('records')});mapping={n:i for i,n in enumerate(names)}
@@ -159,7 +173,11 @@ def bbox(root,out,df,policy,class_policy='defect_type'):
     if errors:raise RuntimeError(f'BBox errors: {len(errors)}')
 
 
+# resolution: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: root, out, df.
 def resolution(root,out,df):
+    # calc: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: row.
     def calc(row):
         im=read_image(root/row['image_path'])
         reference=prepare_image_reference(im)
@@ -181,6 +199,8 @@ def resolution(root,out,df):
     (out/'resolution_analysis_report.md').write_text(f'# 해상도 정보 손실\n\n{len(raw):,}개 JPG의 1024/512/256 정사각 resize와 원본 크기 복원을 비교했습니다. 비정사각 영상은 정사각으로 직접 변형하며 원본 좌표로 다시 복원합니다. INTER_AREA 축소, INTER_LINEAR 복원. 512→256 단계는 512 영상을 기준으로 직접 계산합니다.\n\nSSIM: local Gaussian 11×11 sigma 1.5, data range 255. PSNR: BGR 전체 MSE, 완전 일치 시 저장 상한 120 dB. BGR/RGB 재배열은 전체 RGB RMSE를 바꾸지 않습니다. Canny 100/200, 동일 픽셀 경계 교집합을 사용하므로 위치 이동에도 민감합니다. 고주파 대리값은 Laplacian energy 비율이며 주파수 스펙트럼 직접 측정은 아닙니다. 국소 대비는 11×11 표준편차 평균 비율입니다.\n\n원본 크기는 metadata에서 확인합니다. 이 지표는 영상 복원 변화이며 결함 의미, 검출 정확도, 추론 속도를 측정하지 않습니다. 작은 박스와 저 SSIM 후보를 함께 검수한 뒤 해상도를 실험해야 합니다.\n')
 
 
+# visualize_resolution: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: root, out, df, priority.
 def visualize_resolution(root,out,df,priority):
     import matplotlib.pyplot as plt
     chosen=None
@@ -207,6 +227,8 @@ def visualize_resolution(root,out,df,priority):
     save_json(out/'detail_crop_source.json',dict(image_path=row.image_path,x0=int(x0),y0=int(y0),size=128))
 
 
+# heatmap: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: root, out, df, policy, mode.
 def heatmap(root,out,df,policy,mode='presence'):
     if mode=='area':return area_heatmap(root,out,df,policy)
     from .presence_heatmaps import generate

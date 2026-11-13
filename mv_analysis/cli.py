@@ -1,3 +1,5 @@
+# 한글 안내: 분석 단계별 인수를 해석하고 기존 분석 모듈에 작업을 전달하는 명령행 진입점입니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 from __future__ import annotations
 import argparse
 import hashlib
@@ -14,6 +16,7 @@ import cv2
 cv2.setNumThreads(1)
 
 
+# parser: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
 def parser():
     p=argparse.ArgumentParser(description='Read-only Real-IAD analysis; new output for each execution')
     p.add_argument('--data-root',default=os.getenv('REALIAD_DATA_ROOT'))
@@ -32,6 +35,8 @@ def parser():
     return p
 
 
+# main: 명령행 인수를 읽고 본 파일의 처리 흐름을 실행합니다.
+# 입력 인수: argv.
 def main(argv=None):
     args=parser().parse_args(argv)
     if args.command=='regional-brightness':

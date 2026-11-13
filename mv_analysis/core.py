@@ -1,3 +1,5 @@
+# 한글 안내: Real-IAD 분석 파이프라인의 공통 기능입니다. 입력 자료와 설정의 기존 계약을 유지합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 from __future__ import annotations
 import hashlib
 import json
@@ -15,10 +17,14 @@ import pandas as pd
 VIEWS = {f'C{i}' for i in range(1, 6)}
 
 
+# save_json: 결과를 지정한 출력 위치에 기록합니다.
+# 입력 인수: path, value.
 def save_json(path, value):
     Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False, default=str, allow_nan=False))
 
 
+# read_image: 입력 파일 또는 기록을 읽습니다.
+# 입력 인수: path, mask.
 def read_image(path, mask=False):
     image = cv2.imread(str(path), cv2.IMREAD_UNCHANGED if mask else cv2.IMREAD_COLOR)
     if image is None:
@@ -31,10 +37,14 @@ def read_image(path, mask=False):
 from .schema import parse_image,scan
 
 
+# metadata: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: root, out, limit, decode, split_manifest, split_policy.
 def metadata(root, out, limit=None, decode=True, split_manifest=None, split_policy="hash"):
     images, masks, others = scan(root)
     selected = images[:limit] if limit else images
     records, errors, mask_records = [], [], []
+    # inspect: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: path.
     def inspect(path):
         try:
             row=parse_image(path,root)
@@ -116,6 +126,8 @@ def metadata(root, out, limit=None, decode=True, split_manifest=None, split_poli
     return df, report
 
 
+# audit_masks: 자료와 기록을 대조해 오류와 확인 범위를 남깁니다.
+# 입력 인수: root, df, out, limit.
 def audit_masks(root, df, out, limit=None):
     paths = sorted(set(df.loc[(df.status=='NG') & (df.mask_path!=''),'mask_path']))
     if limit: paths=paths[:limit]
@@ -141,6 +153,8 @@ def audit_masks(root, df, out, limit=None):
     save_json(out/'mask_policy.json',report); return report
 
 
+# binary_mask: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: mask, policy.
 def binary_mask(mask, policy):
     if not policy.get('validated') or policy.get('threshold') not in (0,32,64,127,192,254):
         raise ValueError('No verified binary mask policy; run mask-audit on the complete manifest')
@@ -149,15 +163,21 @@ def binary_mask(mask, policy):
     return (mask>policy['threshold']).astype(np.uint8)
 
 
+# components: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: mask.
 def components(mask):
     from .legacy_bridge import backend
     _,regions=backend().components(mask)
     return [(r['x0'],r['y0'],r['x1'],r['y1'],r['area']) for _,r in regions]
 
 
+# brightness_metrics: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: image.
 def brightness_metrics(image):
     gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     hist=np.bincount(gray.ravel(),minlength=256);cdf=hist.cumsum();n=gray.size
+    # percentile: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: q.
     def percentile(q):
         rank=(n-1)*q;lo=int(rank);hi=int(np.ceil(rank));v0=np.searchsorted(cdf,lo+1);v1=np.searchsorted(cdf,hi+1)
         return float(v0+(v1-v0)*(rank-lo))
@@ -165,6 +185,8 @@ def brightness_metrics(image):
 
 
 
+# prepare_image_reference: 실행에 필요한 입력과 설정을 준비합니다.
+# 입력 인수: image.
 def prepare_image_reference(image):
     a=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY).astype(np.float32)
     ma=cv2.GaussianBlur(a,(11,11),1.5)
@@ -177,6 +199,8 @@ def prepare_image_reference(image):
                 contrast=float(np.sqrt(np.maximum(va,0)).mean()))
 
 
+# information_loss: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: image, size, reference.
 def information_loss(image,size,reference=None):
     h,w=image.shape[:2];ref=reference if reference is not None else prepare_image_reference(image)
     ratio=lambda x,y:float(x/y) if y>1e-10 else None
@@ -198,10 +222,14 @@ def information_loss(image,size,reference=None):
     return dict(target=size,psnr_db=10*np.log10(255**2/mse) if mse>0 else 120.,ssim=ssim,edge_recall=recall,edge_f1=2*precision*recall/(precision+recall) if precision+recall else 0.,laplacian_energy=energy,laplacian_retention=ratio(energy,ref['lap']),gradient_energy=gradient,gradient_retention=ratio(gradient,ref['gradient']),local_contrast_retention=ratio(np.sqrt(np.maximum(vb,0)).mean(),ref['contrast']),rgb_rmse=float(np.sqrt(mse)),high_frequency_proxy_retention=ratio(energy,ref['lap']))
 
 
+# load_df: 자료를 불러와 다음 처리에 사용할 형태로 준비합니다.
+# 입력 인수: out.
 def load_df(out):
     return pd.read_csv(out/'image_metadata_with_split.csv',keep_default_na=False)
 
 
+# plot_bars: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: series, path, title, ylabel.
 def plot_bars(series,path,title,ylabel):
     import matplotlib
     matplotlib.use('Agg')

@@ -1,3 +1,5 @@
+# 한글 안내: 마스크 픽셀 분포와 임계값별 변화를 검토하며 미확정 정책을 임의로 확정하지 않습니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Threshold sensitivity study. Does not silently approve an annotation policy."""
 from pathlib import Path
 import cv2
@@ -8,6 +10,8 @@ from .core import read_image,components,save_json
 THRESHOLDS=(0,32,64,127,192,254)
 
 
+# validate_thresholds: 입력 또는 산출물의 유효성을 검사합니다.
+# 입력 인수: root, out, df, per_group.
 def validate_thresholds(root,out,df,per_group=3):
     folder=out/'mask_threshold_validation';folder.mkdir(exist_ok=True)
     selected=[]

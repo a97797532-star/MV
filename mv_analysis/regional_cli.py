@@ -1,3 +1,5 @@
+# 한글 안내: Real-IAD 분석 파이프라인의 공통 기능입니다. 입력 자료와 설정의 기존 계약을 유지합니다.
+# 재현 주의: 주석 변경도 소스 해시를 바꿉니다. 기존 체크포인트는 원래 설정/해시를 확인하고 새 실행과 구분하세요.
 """Checkpointed background-aware brightness extension; old analyses remain untouched."""
 import argparse,hashlib,json,os,time
 from pathlib import Path
@@ -10,6 +12,8 @@ from .core import read_image,binary_mask,save_json
 cv2.setNumThreads(1)
 
 
+# sample_rows: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: df.
 def sample_rows(df):
     # Reproducible median path per category/view/status: 300 images, no random runtime state.
     selected=[]
@@ -17,12 +21,16 @@ def sample_rows(df):
     return pd.DataFrame(selected).reset_index(drop=True)
 
 
+# overlay: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: image, mask.
 def overlay(image,mask):
     result=image.copy();tint=np.zeros_like(image);tint[:]=[20,180,20];result[mask]=cv2.addWeighted(image,.6,tint,.4,0)[mask]
     contours,_=cv2.findContours(mask.astype(np.uint8),cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE);cv2.drawContours(result,contours,-1,(0,0,255),2)
     return cv2.cvtColor(result,cv2.COLOR_BGR2RGB)
 
 
+# render_review: 자료를 그래프 또는 검수 화면으로 표시합니다.
+# 입력 인수: root, out, df, policy.
 def render_review(root,out,df,policy):
     import matplotlib;matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -52,8 +60,12 @@ def render_review(root,out,df,policy):
     save_json(out/'review_pages.json',dict(pages=pages,scope='one lowest-confidence sample per category; additional examples by predicted background type',ground_truth_masks=False,agreement_is_accuracy=False))
 
 
+# compare_groups: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: df, groupkeys.
 def compare_groups(df,groupkeys):
     rows=[]
+    # diff: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: x, y.
     def diff(x,y):
         if min(len(x),len(y))<2:return dict(difference=None,cohens_d=None,overlap=None)
         x=np.asarray(x,float);y=np.asarray(y,float);pooled=np.sqrt(((len(x)-1)*x.var(ddof=1)+(len(y)-1)*y.var(ddof=1))/(len(x)+len(y)-2));hx,_=np.histogram(x,np.linspace(0,256,33));hy,_=np.histogram(y,np.linspace(0,256,33))
@@ -69,6 +81,8 @@ def compare_groups(df,groupkeys):
     return pd.DataFrame(rows)
 
 
+# summarize: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+# 입력 인수: out, rows, source.
 def summarize(out,rows,source):
     df=pd.DataFrame(rows);df.to_csv(out/'regional_brightness_per_image.csv',index=False)
     quality=[c for c in df if c.startswith(('background_','border_','foreground_','method_','segmentation_')) or c in ['image_path','category','view','status','split','product_touches_border','component_count','adaptive_lab_threshold','internal_background_candidate_fraction']]
@@ -88,6 +102,8 @@ def summarize(out,rows,source):
     return df
 
 
+# main: 명령행 인수를 읽고 본 파일의 처리 흐름을 실행합니다.
+# 입력 인수: argv.
 def main(argv=None):
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--source-run',required=True,type=Path);p.add_argument('--output',required=True,type=Path);p.add_argument('--sample',action='store_true');p.add_argument('--compare-methods',action='store_true');p.add_argument('--resume',action='store_true');p.add_argument('--batch-size',type=int,default=0);p.add_argument('--workers',type=int,default=1);p.add_argument('--finalize',action='store_true');p.add_argument('--validation-evidence',type=Path);a=p.parse_args(argv)
     source=json.loads((a.source_run/'run.json').read_text());root=Path(source['config']['root']);meta=pd.read_csv(a.source_run/'image_metadata_with_split.csv',keep_default_na=False)
@@ -120,6 +136,8 @@ def main(argv=None):
                     f.seek(pos);f.truncate();break
     pending=meta[~meta.image_path.isin(done)]
     if a.batch_size:pending=pending.iloc[:a.batch_size]
+    # process: 이름에 해당하는 세부 처리를 수행하며 반환값과 예외는 아래 구현의 계약을 따릅니다.
+    # 입력 인수: row.
     def process(row):
         try:
             stat=(root/row['image_path']).stat()
