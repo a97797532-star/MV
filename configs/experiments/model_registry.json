@@ -1,0 +1,62 @@
+{
+  "PatchCore": {
+    "official_repo": "https://github.com/amazon-science/patchcore-inspection",
+    "official_commit": "fcaa92f124fb1ad74a7acf56726decd4b27cbcad",
+    "model_family": "anomaly"
+  },
+  "EfficientAD-S": {
+    "official_repo": "https://github.com/nelson1425/EfficientAD",
+    "official_commit": "fcab5146f84ae17597044ad5ddf1656ccf805401",
+    "model_family": "anomaly"
+  },
+  "UniAD": {
+    "official_repo": "https://github.com/zhiyuanyou/UniAD",
+    "official_commit": "a5b9d9d20c2aae680fa00fe5088616b611e05f3c",
+    "model_family": "anomaly"
+  },
+  "HVQ-Trans": {
+    "official_repo": "https://github.com/RuiyingLu/HVQ-Trans",
+    "official_commit": "12fbfa96b906d1462cbfc1787e47e2fc17468134",
+    "model_family": "anomaly"
+  },
+  "Dinomaly": {
+    "official_repo": "https://github.com/guojiajeremy/Dinomaly",
+    "official_commit": "1f252be03a918789b19848f0ca37166e7c28dada",
+    "model_family": "anomaly"
+  },
+  "INP-Former": {
+    "official_repo": "https://github.com/luow23/INP-Former",
+    "official_commit": "17d265381d9b323a2ef6e05aab0665a85edebe84",
+    "model_family": "anomaly"
+  },
+  "Faster R-CNN": {
+    "official_repo": "https://github.com/pytorch/vision",
+    "official_commit": "4260301135e34180d865426765487113f84e7707",
+    "model_family": "detection"
+  },
+  "RetinaNet": {
+    "official_repo": "https://github.com/pytorch/vision",
+    "official_commit": "4260301135e34180d865426765487113f84e7707",
+    "model_family": "detection"
+  },
+  "YOLO11": {
+    "official_repo": "https://github.com/ultralytics/ultralytics",
+    "official_commit": "d2b7876e79ad2e02fd77221622774b511a8f0cb3",
+    "model_family": "detection"
+  },
+  "RT-DETRv2": {
+    "official_repo": "https://github.com/lyuwenyu/RT-DETR",
+    "official_commit": "df2a96c8c3a098567a1149bf0248da6efe6d495d",
+    "model_family": "detection"
+  },
+  "YOLOS": {
+    "official_repo": "https://github.com/hustvl/YOLOS",
+    "official_commit": "5717fc29d727dab84ad585c56457b4de1225eddc",
+    "model_family": "detection"
+  },
+  "ViTDet": {
+    "official_repo": "https://github.com/facebookresearch/detectron2",
+    "official_commit": "247691a1c292654867deb35cabb27f18d75a1363",
+    "model_family": "detection"
+  }
+}
